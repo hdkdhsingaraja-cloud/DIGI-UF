@@ -2,158 +2,661 @@
 <html lang="id">
 
 <head>
-    <!-- Pengaturan karakter -->
+
     <meta charset="UTF-8">
 
-    <!-- Agar tampilan menyesuaikan HP -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <!-- Nama aplikasi -->
+    <meta
+        name="theme-color"
+        content="#087f78"
+    >
+
+    <meta
+        name="description"
+        content="DIGI-UF - Digital Ultrafiltration Rate Calculator"
+    >
+
     <title>DIGI-UF</title>
 
-    <!-- File CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
 
     <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
+    <link
+        rel="manifest"
+        href="./manifest.json"
+    >
 
-    <!-- Warna bagian browser -->
-    <meta name="theme-color" content="#0f766e">
+    <!-- ICON -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="./icon.png"
+    >
+
 </head>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>DIGI-UF | Digital Ultrafiltration Rate Calculator</title>
-
-  <link
-    rel="stylesheet"
-    href="./style.css"
-  >
-</head>
 
 <body>
 
-  <main class="app">
-
-    <h1>DIGI-UF</h1>
-
-    <p>
-      Digital Ultrafiltration Rate Calculator
-    </p>
+    <main class="app">
 
 
-    <!-- =========================
-         DATA PASIEN
-    ========================== -->
+        <!-- ==================================================
+             HEADER
+        =================================================== -->
 
-    <h2>Data Pasien</h2>
+        <header class="app-header">
 
+            <div class="logo-box">
 
-    <label for="kodeSesi">
-      Kode Sesi
-    </label>
+                <img
+                    src="./icon.png"
+                    alt="Logo DIGI-UF"
+                    class="app-logo"
+                >
 
-    <input
-      type="text"
-      id="kodeSesi"
-      placeholder="Contoh: HD001"
-    >
-
-
-    <label for="bb">
-      Berat Badan (kg)
-    </label>
-
-    <input
-      type="number"
-      id="bb"
-      placeholder="Contoh: 60"
-      min="0"
-      step="0.1"
-    >
+            </div>
 
 
-    <label for="uf">
-      UF yang Direncanakan (mL)
-    </label>
+            <div class="header-text">
 
-    <input
-      type="number"
-      id="uf"
-      placeholder="Contoh: 3000"
-      min="0"
-      step="1"
-    >
+                <h1>
+                    DIGI-UF
+                </h1>
 
+                <p>
+                    Digital Ultrafiltration Rate Calculator
+                </p>
 
-    <label for="durasi">
-      Durasi Hemodialisis (jam)
-    </label>
+            </div>
 
-    <input
-      type="number"
-      id="durasi"
-      placeholder="Contoh: 4"
-      min="0"
-      step="0.5"
-    >
+        </header>
 
 
-    <label for="threshold">
-      Threshold High UFR (mL/kg/jam)
-    </label>
 
-    <input
-      type="number"
-      id="threshold"
-      value="13"
-      min="0"
-      step="0.1"
-    >
+        <!-- ==================================================
+             HALAMAN SKRINING
+        =================================================== -->
+
+        <section
+            id="page-skrining"
+            class="page active"
+        >
 
 
-    <!-- =========================
-         TOMBOL HITUNG
-    ========================== -->
+            <!-- JUDUL -->
 
-    <button
-      type="button"
-      onclick="hitungUFR()"
-    >
-      HITUNG UFR
-    </button>
+            <div class="page-title">
 
+                <span class="title-icon">
+                    🏠
+                </span>
 
-    <!-- =========================
-         HASIL
-    ========================== -->
+                <div>
 
-    <div id="hasil"></div>
+                    <h2>
+                        Skrining UFR
+                    </h2>
 
+                    <p>
+                        Hitung dan skrining risiko High UFR
+                    </p>
 
-    <!-- =========================
-         RIWAYAT
-    ========================== -->
+                </div>
 
-    <h2>
-      Riwayat Skrining
-    </h2>
-
-    <div id="riwayat">
-      Belum ada data skrining.
-    </div>
-
-  </main>
+            </div>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
 
-  <script src="./script.js"></script>
+            <!-- ==================================================
+                 DASHBOARD
+            =================================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- TOTAL SKRINING -->
+
+                <div
+                    class="dashboard-card total-card"
+                >
+
+                    <div class="dashboard-icon">
+                        📋
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        <span class="dashboard-label">
+                            Total Skrining
+                        </span>
+
+                        <strong id="totalSkrining">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HIGH UFR -->
+
+                <div
+                    class="dashboard-card high-card"
+                >
+
+                    <div class="dashboard-icon">
+                        🔴
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        <span class="dashboard-label">
+                            HIGH UFR
+                        </span>
+
+                        <strong id="totalHigh">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NORMAL -->
+
+                <div
+                    class="dashboard-card normal-card"
+                >
+
+                    <div class="dashboard-icon">
+                        🟢
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        <span class="dashboard-label">
+                            Di Bawah Threshold
+                        </span>
+
+                        <strong id="totalNormal">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 DATA PASIEN
+            =================================================== -->
+
+            <div class="card">
+
+
+                <div class="card-title">
+
+                    <span>
+                        👤
+                    </span>
+
+                    <h3>
+                        Data Pasien
+                    </h3>
+
+                </div>
+
+
+
+                <!-- KODE SESI -->
+
+                <label for="kodeSesi">
+                    Kode Sesi
+                </label>
+
+                <input
+                    type="text"
+                    id="kodeSesi"
+                    placeholder="Contoh: HD001"
+                    autocomplete="off"
+                >
+
+
+
+                <!-- BERAT BADAN -->
+
+                <label for="bb">
+                    Berat Badan (kg)
+                </label>
+
+                <input
+                    type="number"
+                    id="bb"
+                    placeholder="Contoh: 60"
+                    min="0"
+                    step="0.1"
+                >
+
+
+
+                <!-- UF -->
+
+                <label for="uf">
+                    UF yang Direncanakan (mL)
+                </label>
+
+                <input
+                    type="number"
+                    id="uf"
+                    placeholder="Contoh: 3000"
+                    min="0"
+                    step="1"
+                >
+
+
+
+                <!-- DURASI -->
+
+                <label for="durasi">
+                    Durasi Hemodialisis (jam)
+                </label>
+
+                <input
+                    type="number"
+                    id="durasi"
+                    placeholder="Contoh: 4"
+                    min="0"
+                    step="0.5"
+                >
+
+
+
+                <!-- THRESHOLD -->
+
+                <label for="threshold">
+                    Threshold High UFR
+                    (mL/kg/jam)
+                </label>
+
+                <input
+                    type="number"
+                    id="threshold"
+                    value="13"
+                    min="0"
+                    step="0.1"
+                >
+
+
+
+                <!-- TOMBOL -->
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="hitungUFR()"
+                >
+
+                    <span>
+                        🧮
+                    </span>
+
+                    HITUNG UFR
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 HASIL
+            =================================================== -->
+
+            <div id="hasil"></div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             HALAMAN RIWAYAT
+        =================================================== -->
+
+        <section
+            id="page-riwayat"
+            class="page"
+        >
+
+
+            <div class="page-title">
+
+                <span class="title-icon">
+                    📋
+                </span>
+
+                <div>
+
+                    <h2>
+                        Riwayat Skrining
+                    </h2>
+
+                    <p>
+                        Hasil skrining yang tersimpan
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card history-card">
+
+                <div id="riwayat">
+
+                    Belum ada data skrining.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             HALAMAN TENTANG
+        =================================================== -->
+
+        <section
+            id="page-tentang"
+            class="page"
+        >
+
+
+            <div class="page-title">
+
+                <span class="title-icon">
+                    ℹ️
+                </span>
+
+                <div>
+
+                    <h2>
+                        Tentang DIGI-UF
+                    </h2>
+
+                    <p>
+                        Informasi mengenai aplikasi
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APA ITU -->
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    💧
+                </div>
+
+                <div>
+
+                    <h3>
+                        Apa itu DIGI-UF?
+                    </h3>
+
+                    <p>
+
+                        DIGI-UF
+                        (Digital Ultrafiltration
+                        Rate Calculator) merupakan
+                        alat bantu digital untuk
+                        menghitung Ultrafiltration
+                        Rate (UFR) dan melakukan
+                        skrining awal terhadap risiko
+                        High Ultrafiltration Rate
+                        pada pasien hemodialisis.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RUMUS -->
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    📐
+                </div>
+
+                <div>
+
+                    <h3>
+                        Rumus UFR
+                    </h3>
+
+
+                    <div class="formula">
+
+                        UFR =
+                        UF ÷ BB ÷ Durasi HD
+
+                    </div>
+
+
+                    <p>
+
+                        Satuan UFR:
+                        <strong>
+                            mL/kg/jam
+                        </strong>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TUJUAN -->
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <h3>
+                        Tujuan DIGI-UF
+                    </h3>
+
+                    <p>
+
+                        DIGI-UF dirancang sebagai
+                        alat bantu skrining untuk
+                        membantu mengidentifikasi
+                        hasil UFR yang mencapai
+                        atau melebihi threshold
+                        yang digunakan dalam penelitian.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- KETERBATASAN -->
+
+            <div class="about-card warning-about">
+
+                <div class="about-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <h3>
+                        Keterbatasan
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            DIGI-UF merupakan alat
+                            bantu skrining, bukan
+                            alat diagnosis.
+                        </li>
+
+                        <li>
+                            Hasil tidak menggantikan
+                            penilaian klinis tenaga
+                            kesehatan.
+                        </li>
+
+                        <li>
+                            Threshold harus disesuaikan
+                            dengan dasar ilmiah dan
+                            protokol penelitian.
+                        </li>
+
+                        <li>
+                            Keputusan klinis tetap
+                            dilakukan oleh tenaga
+                            kesehatan yang berwenang.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CATATAN -->
+
+            <div class="info-note">
+
+                <strong>
+                    Catatan:
+                </strong>
+
+                DIGI-UF merupakan alat bantu
+                skrining dan bukan pengganti
+                penilaian klinis atau preskripsi
+                hemodialisis.
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             NAVIGASI
+        =================================================== -->
+
+        <nav class="bottom-nav">
+
+
+            <button
+                type="button"
+                class="nav-item active"
+                onclick="bukaHalaman('skrining', this)"
+            >
+
+                <span class="nav-icon">
+                    🏠
+                </span>
+
+                <span class="nav-text">
+                    Skrining
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="bukaHalaman('riwayat', this)"
+            >
+
+                <span class="nav-icon">
+                    📋
+                </span>
+
+                <span class="nav-text">
+                    Riwayat
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="bukaHalaman('tentang', this)"
+            >
+
+                <span class="nav-icon">
+                    ℹ️
+                </span>
+
+                <span class="nav-text">
+                    Tentang
+                </span>
+
+            </button>
+
+
+        </nav>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="./app.js"
+    ></script>
+
 
 </body>
 
