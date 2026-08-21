@@ -1,0 +1,17 @@
+{
+  "name": "DIGI-UF",
+  "short_name": "DIGI-UF",
+  "description": "Digital Ultrafiltration Rate Calculator untuk skrining dini risiko High Ultrafiltration Rate pada pasien hemodialisis.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef8f7",
+  "theme_color": "#0f766e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
