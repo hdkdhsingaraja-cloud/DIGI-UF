@@ -6,6 +6,11 @@
 <title>DIGI-UF - Digital Ultrafiltration Rate Calculator</title>
 
 <style>
+
+/* =====================================================
+   DASAR
+===================================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -17,10 +22,6 @@ body {
   color: #17324d;
 }
 
-/* =========================
-   APP
-========================= */
-
 .app {
   width: 100%;
   max-width: 560px;
@@ -30,9 +31,10 @@ body {
   box-shadow: 0 0 30px rgba(0,0,0,0.08);
 }
 
-/* =========================
+
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 .header {
   background: linear-gradient(135deg, #087f78, #0f9b91);
@@ -60,9 +62,10 @@ body {
   font-size: 34px;
 }
 
-/* =========================
+
+/* =====================================================
    DASHBOARD
-========================= */
+===================================================== */
 
 .dashboard {
   padding: 16px;
@@ -137,9 +140,10 @@ body {
   color: #15803d;
 }
 
-/* =========================
+
+/* =====================================================
    CARD
-========================= */
+===================================================== */
 
 .card {
   background: white;
@@ -175,9 +179,10 @@ body {
   color: #17324d;
 }
 
-/* =========================
+
+/* =====================================================
    FORM
-========================= */
+===================================================== */
 
 .form-group {
   margin-bottom: 17px;
@@ -199,7 +204,6 @@ input {
   font-size: 14px;
   background: #fbfdfe;
   outline: none;
-  transition: 0.2s;
 }
 
 input:focus {
@@ -207,9 +211,10 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(15,143,135,0.10);
 }
 
-/* =========================
+
+/* =====================================================
    KLASIFIKASI
-========================= */
+===================================================== */
 
 .classification-info {
   margin: 20px 0;
@@ -253,9 +258,10 @@ input:focus {
   background: #ef233c;
 }
 
-/* =========================
+
+/* =====================================================
    BUTTON
-========================= */
+===================================================== */
 
 .calculate-btn {
   width: 100%;
@@ -274,9 +280,10 @@ input:focus {
   transform: translateY(-1px);
 }
 
-/* =========================
+
+/* =====================================================
    PESAN
-========================= */
+===================================================== */
 
 #pesan {
   text-align: center;
@@ -285,9 +292,10 @@ input:focus {
   margin-top: 12px;
 }
 
-/* =========================
+
+/* =====================================================
    HASIL
-========================= */
+===================================================== */
 
 .result-box {
   border-radius: 18px;
@@ -335,9 +343,45 @@ input:focus {
   line-height: 1.8;
 }
 
-/* =========================
+
+/* =====================================================
+   TOMBOL CETAK
+===================================================== */
+
+.print-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.print-btn {
+  border: none;
+  border-radius: 11px;
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.print-history {
+  background: #e7f7f5;
+  color: #087f78;
+}
+
+.print-last {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.print-btn:hover {
+  opacity: 0.85;
+}
+
+
+/* =====================================================
    RIWAYAT
-========================= */
+===================================================== */
 
 .history-item {
   border: 1px solid #e2e8f0;
@@ -422,6 +466,7 @@ input:focus {
   border-radius: 11px;
   font-weight: 800;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 .empty-history {
@@ -431,9 +476,10 @@ input:focus {
   font-size: 13px;
 }
 
-/* =========================
+
+/* =====================================================
    ABOUT
-========================= */
+===================================================== */
 
 .about-content {
   font-size: 13px;
@@ -499,9 +545,10 @@ input:focus {
   color: #dc2626;
 }
 
-/* =========================
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer {
   text-align: center;
@@ -511,9 +558,19 @@ footer {
   line-height: 1.6;
 }
 
-/* =========================
+
+/* =====================================================
+   CETAK
+===================================================== */
+
+.print-only {
+  display: none;
+}
+
+
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media (max-width: 430px) {
 
@@ -533,209 +590,543 @@ footer {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .print-buttons {
+    grid-template-columns: 1fr;
+  }
 }
+
+
+/* =====================================================
+   MODE PRINT
+===================================================== */
+
+@media print {
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white;
+  }
+
+  .app {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-container {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+  }
+
+  .print-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .print-header h1 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .print-header p {
+    margin: 5px 0;
+    font-size: 12px;
+  }
+
+  .print-line {
+    border-bottom: 2px solid black;
+    margin-top: 12px;
+  }
+
+  .print-info {
+    margin: 15px 0;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 7px 5px;
+    text-align: center;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  .print-footer {
+    margin-top: 20px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
-  <!-- HEADER -->
-  <header class="header">
+<!-- ===================================================
+     HEADER
+=================================================== -->
+
+<header class="header">
+
+  <div>
+
+    <div class="brand">
+      💧 DIGI-UF
+    </div>
+
+    <div class="subtitle">
+      Digital Ultrafiltration Rate Calculator
+    </div>
+
+  </div>
+
+  <div class="header-icon">
+    🩺
+  </div>
+
+</header>
+
+
+<!-- ===================================================
+     DASHBOARD
+=================================================== -->
+
+<section class="dashboard">
+
+  <div class="stat-card total">
+
+    <div class="stat-icon">
+      📋
+    </div>
 
     <div>
-      <div class="brand">💧 DIGI-UF</div>
 
-      <div class="subtitle">
-        Digital Ultrafiltration Rate Calculator
-      </div>
-    </div>
-
-    <div class="header-icon">
-      🩺
-    </div>
-
-  </header>
-
-
-  <!-- DASHBOARD -->
-  <section class="dashboard">
-
-    <div class="stat-card total">
-
-      <div class="stat-icon">
-        📋
+      <div class="stat-label">
+        Total Screening
       </div>
 
-      <div>
-        <div class="stat-label">
-          Total Screening
-        </div>
-
-        <div class="stat-number" id="totalScreening">
-          0
-        </div>
+      <div
+        class="stat-number"
+        id="totalScreening">
+        0
       </div>
 
     </div>
 
+  </div>
 
-    <div class="stat-card high">
 
-      <div class="stat-icon">
-        🔴
-      </div>
+  <div class="stat-card high">
 
-      <div>
-        <div class="stat-label">
-          High UFR
-        </div>
-
-        <div class="stat-number" id="highCount">
-          0
-        </div>
-      </div>
-
+    <div class="stat-icon">
+      🔴
     </div>
 
+    <div>
 
-    <div class="stat-card warning">
-
-      <div class="stat-icon">
-        🟡
+      <div class="stat-label">
+        High UFR
       </div>
 
-      <div>
-        <div class="stat-label">
-          Early Warning
-        </div>
-
-        <div class="stat-number" id="warningCount">
-          0
-        </div>
+      <div
+        class="stat-number"
+        id="highCount">
+        0
       </div>
 
     </div>
 
+  </div>
 
-    <div class="stat-card low">
 
-      <div class="stat-icon">
-        🟢
+  <div class="stat-card warning">
+
+    <div class="stat-icon">
+      🟡
+    </div>
+
+    <div>
+
+      <div class="stat-label">
+        Early Warning
       </div>
 
-      <div>
-        <div class="stat-label">
-          Rendah
-        </div>
-
-        <div class="stat-number" id="lowCount">
-          0
-        </div>
+      <div
+        class="stat-number"
+        id="warningCount">
+        0
       </div>
 
     </div>
 
-  </section>
+  </div>
 
 
-  <!-- DATA PASIEN -->
-  <section class="card">
+  <div class="stat-card low">
 
-    <div class="card-title">
+    <div class="stat-icon">
+      🟢
+    </div>
 
-      <div class="card-title-icon">
-        👤
+    <div>
+
+      <div class="stat-label">
+        Rendah
       </div>
 
-      <h2>
-        Data Pasien
-      </h2>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="kodeSesi">
-        Kode Sesi
-      </label>
-
-      <input
-        type="text"
-        id="kodeSesi"
-        placeholder="Contoh: HD001"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="bb">
-        Berat Badan (kg)
-      </label>
-
-      <input
-        type="number"
-        id="bb"
-        placeholder="Contoh: 60"
-        min="1"
-        step="0.1"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="uf">
-        UF yang Direncanakan (mL)
-      </label>
-
-      <input
-        type="number"
-        id="uf"
-        placeholder="Contoh: 3000"
-        min="1"
-        step="1"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="durasi">
-        Durasi Hemodialisis (jam)
-      </label>
-
-      <input
-        type="number"
-        id="durasi"
-        placeholder="Contoh: 4"
-        min="0.5"
-        step="0.5"
-      >
-
-    </div>
-
-
-    <!-- KLASIFIKASI -->
-    <div class="classification-info">
-
-      <div class="classification-title">
-        📊 Klasifikasi DIGI-UF
+      <div
+        class="stat-number"
+        id="lowCount">
+        0
       </div>
 
+    </div>
 
-      <div class="classification-row">
+  </div>
 
-        <span class="dot green"></span>
+</section>
+
+
+<!-- ===================================================
+     INPUT DATA
+=================================================== -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div class="card-title-icon">
+      👤
+    </div>
+
+    <h2>
+      Data Pasien
+    </h2>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="kodeSesi">
+      Kode Sesi
+    </label>
+
+    <input
+      type="text"
+      id="kodeSesi"
+      placeholder="Contoh: HD001">
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="bb">
+      Berat Badan (kg)
+    </label>
+
+    <input
+      type="number"
+      id="bb"
+      placeholder="Contoh: 60"
+      min="1"
+      step="0.1">
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="uf">
+      UF yang Direncanakan (mL)
+    </label>
+
+    <input
+      type="number"
+      id="uf"
+      placeholder="Contoh: 3000"
+      min="1"
+      step="1">
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="durasi">
+      Durasi Hemodialisis (jam)
+    </label>
+
+    <input
+      type="number"
+      id="durasi"
+      placeholder="Contoh: 4"
+      min="0.5"
+      step="0.5">
+
+  </div>
+
+
+  <!-- KLASIFIKASI -->
+
+  <div class="classification-info">
+
+    <div class="classification-title">
+      📊 Klasifikasi DIGI-UF
+    </div>
+
+
+    <div class="classification-row">
+
+      <span class="dot green"></span>
+
+      <strong>
+        Rendah
+      </strong>
+
+      <span>
+        &lt; 10 mL/kg/jam
+      </span>
+
+    </div>
+
+
+    <div class="classification-row">
+
+      <span class="dot yellow"></span>
+
+      <strong>
+        Early Warning / Waspada
+      </strong>
+
+      <span>
+        10–13 mL/kg/jam
+      </span>
+
+    </div>
+
+
+    <div class="classification-row">
+
+      <span class="dot red"></span>
+
+      <strong>
+        High UFR
+      </strong>
+
+      <span>
+        &gt; 13 mL/kg/jam
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="calculate-btn"
+    onclick="hitungUFR()">
+
+    🔍 Hitung & Skrining UFR
+
+  </button>
+
+
+  <div id="pesan"></div>
+
+</section>
+
+
+<!-- ===================================================
+     HASIL
+=================================================== -->
+
+<section
+  class="card"
+  id="hasilCard"
+  style="display:none;">
+
+  <div class="card-title">
+
+    <div class="card-title-icon">
+      📊
+    </div>
+
+    <h2>
+      Hasil Skrining
+    </h2>
+
+  </div>
+
+
+  <div id="hasil"></div>
+
+
+  <!-- CETAK -->
+
+  <div class="print-buttons">
+
+    <button
+      class="print-btn print-last"
+      onclick="cetakHasilTerakhir()">
+
+      🖨️ Cetak Hasil Ini
+
+    </button>
+
+    <button
+      class="print-btn print-history"
+      onclick="cetakRiwayat()">
+
+      🖨️ Cetak Semua Riwayat
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ===================================================
+     RIWAYAT
+=================================================== -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div class="card-title-icon">
+      🕘
+    </div>
+
+    <h2>
+      Riwayat Skrining
+    </h2>
+
+  </div>
+
+
+  <div id="riwayat"></div>
+
+
+  <button
+    class="delete-all-btn"
+    onclick="hapusSemuaRiwayat()">
+
+    🗑️ Hapus Semua Riwayat
+
+  </button>
+
+</section>
+
+
+<!-- ===================================================
+     TENTANG DIGI-UF
+=================================================== -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div class="card-title-icon">
+      ℹ️
+    </div>
+
+    <h2>
+      Tentang DIGI-UF
+    </h2>
+
+  </div>
+
+
+  <div class="about-content">
+
+    <h3>
+      💧 Apa itu DIGI-UF?
+    </h3>
+
+    <p>
+
+      <strong>DIGI-UF</strong> merupakan inovasi digital berupa
+      <strong>Digital Ultrafiltration Rate Calculator</strong>
+      yang dirancang sebagai alat bantu skrining dini
+      risiko High Ultrafiltration Rate pada pasien hemodialisis.
+
+    </p>
+
+
+    <h3>
+      📐 Rumus UFR
+    </h3>
+
+
+    <div class="formula">
+
+      UFR = UF ÷ BB ÷ Durasi Hemodialisis
+
+    </div>
+
+
+    <p>
+      Keterangan:
+    </p>
+
+
+    <ul>
+
+      <li>
+        <strong>UF</strong> =
+        ultrafiltrasi yang direncanakan (mL)
+      </li>
+
+      <li>
+        <strong>BB</strong> =
+        berat badan pasien (kg)
+      </li>
+
+      <li>
+        <strong>Durasi</strong> =
+        lama hemodialisis (jam)
+      </li>
+
+    </ul>
+
+
+    <h3>
+      📊 Klasifikasi DIGI-UF
+    </h3>
+
+
+    <div class="about-classification">
+
+      <div class="about-box green-box">
 
         <strong>
-          Rendah
+          🟢 RENDAH
         </strong>
 
         <span>
@@ -745,12 +1136,10 @@ footer {
       </div>
 
 
-      <div class="classification-row">
-
-        <span class="dot yellow"></span>
+      <div class="about-box yellow-box">
 
         <strong>
-          Early Warning / Waspada
+          🟡 EARLY WARNING / WASPADA
         </strong>
 
         <span>
@@ -760,12 +1149,10 @@ footer {
       </div>
 
 
-      <div class="classification-row">
-
-        <span class="dot red"></span>
+      <div class="about-box red-box">
 
         <strong>
-          High UFR
+          🔴 HIGH UFR
         </strong>
 
         <span>
@@ -777,217 +1164,58 @@ footer {
     </div>
 
 
-    <button
-      class="calculate-btn"
-      onclick="hitungUFR()"
-    >
-      🔍 Hitung & Skrining UFR
-    </button>
+    <h3>
+      🎯 Tujuan
+    </h3>
 
+    <p>
 
-    <div id="pesan"></div>
+      DIGI-UF membantu tenaga kesehatan melakukan
+      perhitungan UFR secara cepat serta memberikan
+      klasifikasi awal untuk mendukung pemantauan
+      pasien hemodialisis.
 
-  </section>
+    </p>
 
 
-  <!-- HASIL -->
-  <section
-    class="card"
-    id="hasilCard"
-    style="display:none;"
-  >
+    <h3>
+      ⚠️ Catatan Penting
+    </h3>
 
-    <div class="card-title">
+    <p>
 
-      <div class="card-title-icon">
-        📊
-      </div>
+      DIGI-UF merupakan alat bantu skrining dan
+      <strong>bukan pengganti penilaian klinis</strong>.
+      Hasil skrining perlu dipertimbangkan bersama
+      kondisi klinis pasien dan keputusan tenaga kesehatan.
 
-      <h2>
-        Hasil Skrining
-      </h2>
+    </p>
 
-    </div>
+  </div>
 
-    <div id="hasil"></div>
+</section>
 
-  </section>
 
+<footer>
 
-  <!-- RIWAYAT -->
-  <section class="card">
+  <strong>DIGI-UF</strong><br>
 
-    <div class="card-title">
+  Digital Ultrafiltration Rate Calculator<br>
 
-      <div class="card-title-icon">
-        🕘
-      </div>
+  Alat Bantu Skrining UFR pada Pasien Hemodialisis
 
-      <h2>
-        Riwayat Skrining
-      </h2>
+</footer>
 
-    </div>
+</div>
 
 
-    <div id="riwayat"></div>
+<!-- ===================================================
+     AREA KHUSUS PRINT
+=================================================== -->
 
-
-    <button
-      class="delete-all-btn"
-      onclick="hapusSemuaRiwayat()"
-    >
-      🗑️ Hapus Semua Riwayat
-    </button>
-
-  </section>
-
-
-  <!-- TENTANG DIGI-UF -->
-  <section class="card">
-
-    <div class="card-title">
-
-      <div class="card-title-icon">
-        ℹ️
-      </div>
-
-      <h2>
-        Tentang DIGI-UF
-      </h2>
-
-    </div>
-
-
-    <div class="about-content">
-
-      <h3>
-        💧 Apa itu DIGI-UF?
-      </h3>
-
-      <p>
-        <strong>DIGI-UF</strong> merupakan inovasi digital berupa
-        <strong>Digital Ultrafiltration Rate Calculator</strong>
-        yang dirancang sebagai alat bantu skrining dini
-        risiko High Ultrafiltration Rate pada pasien hemodialisis.
-      </p>
-
-
-      <h3>
-        📐 Rumus UFR
-      </h3>
-
-      <div class="formula">
-        UFR = UF ÷ BB ÷ Durasi Hemodialisis
-      </div>
-
-
-      <p>
-        Keterangan:
-      </p>
-
-      <ul>
-
-        <li>
-          <strong>UF</strong> = ultrafiltrasi yang direncanakan (mL)
-        </li>
-
-        <li>
-          <strong>BB</strong> = berat badan pasien (kg)
-        </li>
-
-        <li>
-          <strong>Durasi</strong> = lama hemodialisis (jam)
-        </li>
-
-      </ul>
-
-
-      <h3>
-        📊 Klasifikasi DIGI-UF
-      </h3>
-
-
-      <div class="about-classification">
-
-        <div class="about-box green-box">
-
-          <strong>
-            🟢 RENDAH
-          </strong>
-
-          <span>
-            &lt; 10 mL/kg/jam
-          </span>
-
-        </div>
-
-
-        <div class="about-box yellow-box">
-
-          <strong>
-            🟡 EARLY WARNING / WASPADA
-          </strong>
-
-          <span>
-            10–13 mL/kg/jam
-          </span>
-
-        </div>
-
-
-        <div class="about-box red-box">
-
-          <strong>
-            🔴 HIGH UFR
-          </strong>
-
-          <span>
-            &gt; 13 mL/kg/jam
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <h3>
-        🎯 Tujuan
-      </h3>
-
-      <p>
-        DIGI-UF membantu tenaga kesehatan melakukan
-        perhitungan UFR secara cepat serta memberikan
-        klasifikasi awal untuk mendukung pemantauan
-        pasien hemodialisis.
-      </p>
-
-
-      <h3>
-        ⚠️ Catatan Penting
-      </h3>
-
-      <p>
-        DIGI-UF merupakan alat bantu skrining dan
-        <strong>bukan pengganti penilaian klinis</strong>.
-        Hasil skrining perlu dipertimbangkan bersama
-        kondisi klinis pasien dan keputusan tenaga kesehatan.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <footer>
-
-    <strong>DIGI-UF</strong><br>
-
-    Digital Ultrafiltration Rate Calculator<br>
-
-    Alat Bantu Skrining UFR pada Pasien Hemodialisis
-
-  </footer>
+<div
+  id="printArea"
+  class="print-only">
 
 </div>
 
@@ -995,8 +1223,7 @@ footer {
 <script>
 
 /* =====================================================
-   DIGI-UF
-   LOGIKA KLASIFIKASI FINAL
+   BATAS KLASIFIKASI
 ===================================================== */
 
 const BATAS_RENDAH = 10;
@@ -1004,15 +1231,17 @@ const BATAS_HIGH = 13;
 
 
 /* =====================================================
-   DATA RIWAYAT
+   RIWAYAT
 ===================================================== */
 
 let riwayatData =
-  JSON.parse(localStorage.getItem("digiUFHistory")) || [];
+  JSON.parse(
+    localStorage.getItem("digiUFHistory")
+  ) || [];
 
 
 /* =====================================================
-   KLASIFIKASI UFR
+   KLASIFIKASI
 ===================================================== */
 
 function klasifikasiUFR(ufr) {
@@ -1020,35 +1249,53 @@ function klasifikasiUFR(ufr) {
   if (ufr < BATAS_RENDAH) {
 
     return {
+
       kategori: "RENDAH",
+
       kelas: "low",
+
       icon: "🟢",
+
       keterangan:
         "UFR berada di bawah 10 mL/kg/jam."
+
     };
 
   }
+
 
   else if (ufr <= BATAS_HIGH) {
 
     return {
-      kategori: "EARLY WARNING / WASPADA",
+
+      kategori:
+        "EARLY WARNING / WASPADA",
+
       kelas: "warning",
+
       icon: "🟡",
+
       keterangan:
         "UFR berada pada rentang 10–13 mL/kg/jam."
+
     };
 
   }
 
+
   else {
 
     return {
+
       kategori: "HIGH UFR",
+
       kelas: "high",
+
       icon: "🔴",
+
       keterangan:
         "UFR lebih dari 13 mL/kg/jam."
+
     };
 
   }
@@ -1063,19 +1310,35 @@ function klasifikasiUFR(ufr) {
 function hitungUFR() {
 
   const kode =
-    document.getElementById("kodeSesi").value.trim();
+    document
+      .getElementById("kodeSesi")
+      .value
+      .trim();
+
 
   const bb =
-    parseFloat(document.getElementById("bb").value);
+    parseFloat(
+      document
+        .getElementById("bb")
+        .value
+    );
+
 
   const uf =
-    parseFloat(document.getElementById("uf").value);
+    parseFloat(
+      document
+        .getElementById("uf")
+        .value
+    );
+
 
   const durasi =
-    parseFloat(document.getElementById("durasi").value);
+    parseFloat(
+      document
+        .getElementById("durasi")
+        .value
+    );
 
-
-  /* VALIDASI */
 
   if (!kode || !bb || !uf || !durasi) {
 
@@ -1088,10 +1351,14 @@ function hitungUFR() {
   }
 
 
-  if (bb <= 0 || uf <= 0 || durasi <= 0) {
+  if (
+    bb <= 0 ||
+    uf <= 0 ||
+    durasi <= 0
+  ) {
 
     tampilkanPesan(
-      "⚠️ Berat badan, UF, dan durasi harus lebih dari 0.",
+      "⚠️ Nilai harus lebih dari 0.",
       "red"
     );
 
@@ -1099,18 +1366,16 @@ function hitungUFR() {
   }
 
 
-  /* =================================================
-     RUMUS UFR
-     
-     UFR = UF / BB / DURASI
-  ================================================= */
+  /* RUMUS */
 
   const ufr =
     uf / bb / durasi;
 
 
   const ufrHasil =
-    Number(ufr.toFixed(2));
+    Number(
+      ufr.toFixed(2)
+    );
 
 
   /* KLASIFIKASI */
@@ -1119,18 +1384,22 @@ function hitungUFR() {
     klasifikasiUFR(ufr);
 
 
-  /* =================================================
-     TAMPILKAN HASIL
-  ================================================= */
+  /* HASIL */
 
   const hasilCard =
-    document.getElementById("hasilCard");
+    document.getElementById(
+      "hasilCard"
+    );
+
 
   const hasil =
-    document.getElementById("hasil");
+    document.getElementById(
+      "hasil"
+    );
 
 
-  hasilCard.style.display = "block";
+  hasilCard.style.display =
+    "block";
 
 
   hasil.innerHTML = `
@@ -1138,17 +1407,27 @@ function hitungUFR() {
     <div class="result-box ${klasifikasi.kelas}">
 
       <div class="result-status">
+
         ${klasifikasi.icon}
+
         ${klasifikasi.kategori}
+
       </div>
+
 
       <div class="result-ufr">
+
         ${ufrHasil}
+
       </div>
 
+
       <div class="result-unit">
+
         mL/kg/jam
+
       </div>
+
 
       <div class="result-detail">
 
@@ -1178,9 +1457,7 @@ function hitungUFR() {
   `;
 
 
-  /* =================================================
-     SIMPAN RIWAYAT
-  ================================================= */
+  /* SIMPAN */
 
   const dataBaru = {
 
@@ -1196,26 +1473,31 @@ function hitungUFR() {
 
     ufr: ufrHasil,
 
-    kategori: klasifikasi.kategori,
+    kategori:
+      klasifikasi.kategori,
 
-    kelas: klasifikasi.kelas,
+    kelas:
+      klasifikasi.kelas,
 
     tanggal:
-      new Date().toLocaleString("id-ID")
+      new Date()
+        .toLocaleString("id-ID")
 
   };
 
 
-  riwayatData.unshift(dataBaru);
+  riwayatData.unshift(
+    dataBaru
+  );
 
 
   localStorage.setItem(
     "digiUFHistory",
-    JSON.stringify(riwayatData)
+    JSON.stringify(
+      riwayatData
+    )
   );
 
-
-  /* UPDATE */
 
   updateDashboard();
 
@@ -1228,13 +1510,14 @@ function hitungUFR() {
   );
 
 
-  /* SCROLL */
-
   setTimeout(function() {
 
     hasilCard.scrollIntoView({
+
       behavior: "smooth",
+
       block: "start"
+
     });
 
   }, 200);
@@ -1246,24 +1529,32 @@ function hitungUFR() {
    PESAN
 ===================================================== */
 
-function tampilkanPesan(teks, warna) {
+function tampilkanPesan(
+  teks,
+  warna
+) {
 
   const pesan =
-    document.getElementById("pesan");
+    document.getElementById(
+      "pesan"
+    );
 
 
-  pesan.innerHTML = teks;
+  pesan.innerHTML =
+    teks;
 
 
   if (warna === "red") {
 
-    pesan.style.color = "#dc2626";
+    pesan.style.color =
+      "#dc2626";
 
   }
 
   else {
 
-    pesan.style.color = "#15803d";
+    pesan.style.color =
+      "#15803d";
 
   }
 
@@ -1282,55 +1573,66 @@ function updateDashboard() {
 
   const high =
     riwayatData.filter(
-      item => item.kelas === "high"
+      item =>
+        item.kelas === "high"
     ).length;
 
 
   const warning =
     riwayatData.filter(
-      item => item.kelas === "warning"
+      item =>
+        item.kelas === "warning"
     ).length;
 
 
   const low =
     riwayatData.filter(
-      item => item.kelas === "low"
+      item =>
+        item.kelas === "low"
     ).length;
 
 
   document.getElementById(
     "totalScreening"
-  ).textContent = total;
+  ).textContent =
+    total;
 
 
   document.getElementById(
     "highCount"
-  ).textContent = high;
+  ).textContent =
+    high;
 
 
   document.getElementById(
     "warningCount"
-  ).textContent = warning;
+  ).textContent =
+    warning;
 
 
   document.getElementById(
     "lowCount"
-  ).textContent = low;
+  ).textContent =
+    low;
 
 }
 
 
 /* =====================================================
-   TAMPILKAN RIWAYAT
+   RIWAYAT
 ===================================================== */
 
 function tampilkanRiwayat() {
 
   const container =
-    document.getElementById("riwayat");
+    document.getElementById(
+      "riwayat"
+    );
 
 
-  if (riwayatData.length === 0) {
+  if (
+    riwayatData.length === 0
+  ) {
 
     container.innerHTML = `
 
@@ -1347,79 +1649,88 @@ function tampilkanRiwayat() {
 
 
   container.innerHTML =
-    riwayatData.map(function(item) {
+    riwayatData
+      .map(function(item) {
 
-      return `
+        return `
 
-        <div class="history-item">
+          <div class="history-item">
 
-          <div class="history-top">
+            <div class="history-top">
 
-            <div class="history-code">
-              ${item.kode}
+              <div class="history-code">
+
+                ${item.kode}
+
+              </div>
+
+
+              <div class="history-date">
+
+                ${item.tanggal}
+
+              </div>
+
             </div>
 
-            <div class="history-date">
-              ${item.tanggal}
+
+            <div class="history-ufr">
+
+              ${item.ufr}
+              mL/kg/jam
+
             </div>
 
+
+            <span
+              class="badge ${item.kelas}">
+
+              ${item.kategori}
+
+            </span>
+
+
+            <div class="history-detail">
+
+              BB: ${item.bb} kg
+              <br>
+
+              UF: ${item.uf} mL
+              <br>
+
+              Durasi: ${item.durasi} jam
+
+            </div>
+
+
+            <button
+              class="delete-history"
+              onclick="hapusRiwayat(${item.id})">
+
+              🗑️ Hapus
+
+            </button>
+
           </div>
 
+        `;
 
-          <div class="history-ufr">
-
-            ${item.ufr}
-            mL/kg/jam
-
-          </div>
-
-
-          <span class="badge ${item.kelas}">
-
-            ${item.kategori}
-
-          </span>
-
-
-          <div class="history-detail">
-
-            BB: ${item.bb} kg
-            <br>
-
-            UF: ${item.uf} mL
-            <br>
-
-            Durasi: ${item.durasi} jam
-
-          </div>
-
-
-          <button
-            class="delete-history"
-            onclick="hapusRiwayat(${item.id})"
-          >
-
-            🗑️ Hapus
-
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
+      })
+      .join("");
 
 }
 
 
 /* =====================================================
-   HAPUS SATU RIWAYAT
+   HAPUS SATU
 ===================================================== */
 
 function hapusRiwayat(id) {
 
   const yakin =
-    confirm("Hapus data skrining ini?");
+    confirm(
+      "Hapus data skrining ini?"
+    );
 
 
   if (!yakin) return;
@@ -1427,13 +1738,16 @@ function hapusRiwayat(id) {
 
   riwayatData =
     riwayatData.filter(
-      item => item.id !== id
+      item =>
+        item.id !== id
     );
 
 
   localStorage.setItem(
     "digiUFHistory",
-    JSON.stringify(riwayatData)
+    JSON.stringify(
+      riwayatData
+    )
   );
 
 
@@ -1445,12 +1759,14 @@ function hapusRiwayat(id) {
 
 
 /* =====================================================
-   HAPUS SEMUA RIWAYAT
+   HAPUS SEMUA
 ===================================================== */
 
 function hapusSemuaRiwayat() {
 
-  if (riwayatData.length === 0) {
+  if (
+    riwayatData.length === 0
+  ) {
 
     alert(
       "Belum ada riwayat yang tersimpan."
@@ -1484,13 +1800,423 @@ function hapusSemuaRiwayat() {
 
   document.getElementById(
     "hasilCard"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
 }
 
 
 /* =====================================================
-   LOAD APLIKASI
+   CETAK SEMUA RIWAYAT
+===================================================== */
+
+function cetakRiwayat() {
+
+  if (
+    riwayatData.length === 0
+  ) {
+
+    alert(
+      "Belum ada riwayat skrining yang dapat dicetak."
+    );
+
+    return;
+  }
+
+
+  let rows = "";
+
+
+  riwayatData.forEach(
+    function(item, index) {
+
+      rows += `
+
+        <tr>
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            ${item.kode}
+          </td>
+
+          <td>
+            ${item.bb}
+          </td>
+
+          <td>
+            ${item.uf}
+          </td>
+
+          <td>
+            ${item.durasi}
+          </td>
+
+          <td>
+            ${item.ufr}
+          </td>
+
+          <td>
+            ${item.kategori}
+          </td>
+
+          <td>
+            ${item.tanggal}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  const printArea =
+    document.getElementById(
+      "printArea"
+    );
+
+
+  printArea.innerHTML = `
+
+    <div class="print-container">
+
+      <div class="print-header">
+
+        <h1>
+          DIGI-UF
+        </h1>
+
+        <p>
+          Digital Ultrafiltration Rate Calculator
+        </p>
+
+        <p>
+          <strong>
+            LAPORAN RIWAYAT SKRINING UFR
+          </strong>
+        </p>
+
+        <div class="print-line"></div>
+
+      </div>
+
+
+      <div class="print-info">
+
+        <strong>
+          Tanggal Cetak:
+        </strong>
+
+        ${new Date().toLocaleString("id-ID")}
+
+        <br>
+
+        <strong>
+          Total Skrining:
+        </strong>
+
+        ${riwayatData.length}
+
+      </div>
+
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              No
+            </th>
+
+            <th>
+              Kode Sesi
+            </th>
+
+            <th>
+              BB<br>(kg)
+            </th>
+
+            <th>
+              UF<br>(mL)
+            </th>
+
+            <th>
+              Durasi<br>(jam)
+            </th>
+
+            <th>
+              UFR<br>(mL/kg/jam)
+            </th>
+
+            <th>
+              Klasifikasi
+            </th>
+
+            <th>
+              Tanggal
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${rows}
+
+        </tbody>
+
+      </table>
+
+
+      <div class="print-footer">
+
+        <strong>
+          Klasifikasi DIGI-UF:
+        </strong>
+
+        <br>
+
+        Rendah:
+        &lt; 10 mL/kg/jam
+
+        <br>
+
+        Early Warning / Waspada:
+        10–13 mL/kg/jam
+
+        <br>
+
+        High UFR:
+        &gt; 13 mL/kg/jam
+
+        <br><br>
+
+        DIGI-UF merupakan alat bantu skrining
+        dan bukan pengganti penilaian klinis.
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  window.print();
+
+}
+
+
+/* =====================================================
+   CETAK HASIL TERAKHIR
+===================================================== */
+
+function cetakHasilTerakhir() {
+
+  if (
+    riwayatData.length === 0
+  ) {
+
+    alert(
+      "Belum ada hasil skrining yang dapat dicetak."
+    );
+
+    return;
+  }
+
+
+  const item =
+    riwayatData[0];
+
+
+  const printArea =
+    document.getElementById(
+      "printArea"
+    );
+
+
+  printArea.innerHTML = `
+
+    <div class="print-container">
+
+      <div class="print-header">
+
+        <h1>
+          DIGI-UF
+        </h1>
+
+        <p>
+          Digital Ultrafiltration Rate Calculator
+        </p>
+
+        <p>
+          <strong>
+            HASIL SKRINING UFR
+          </strong>
+        </p>
+
+        <div class="print-line"></div>
+
+      </div>
+
+
+      <div class="print-info">
+
+        <strong>
+          Kode Sesi:
+        </strong>
+        ${item.kode}
+
+        <br>
+
+        <strong>
+          Tanggal:
+        </strong>
+        ${item.tanggal}
+
+      </div>
+
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Parameter
+            </th>
+
+            <th>
+              Hasil
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+
+            <td>
+              Berat Badan
+            </td>
+
+            <td>
+              ${item.bb} kg
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              UF Direncanakan
+            </td>
+
+            <td>
+              ${item.uf} mL
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Durasi Hemodialisis
+            </td>
+
+            <td>
+              ${item.durasi} jam
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              UFR
+            </td>
+
+            <td>
+              <strong>
+                ${item.ufr} mL/kg/jam
+              </strong>
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Klasifikasi
+            </td>
+
+            <td>
+              <strong>
+                ${item.kategori}
+              </strong>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <div class="print-footer">
+
+        <strong>
+          Klasifikasi DIGI-UF:
+        </strong>
+
+        <br>
+
+        Rendah:
+        &lt; 10 mL/kg/jam
+
+        <br>
+
+        Early Warning / Waspada:
+        10–13 mL/kg/jam
+
+        <br>
+
+        High UFR:
+        &gt; 13 mL/kg/jam
+
+        <br><br>
+
+        DIGI-UF merupakan alat bantu skrining
+        dan bukan pengganti penilaian klinis.
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  window.print();
+
+}
+
+
+/* =====================================================
+   LOAD
 ===================================================== */
 
 document.addEventListener(
