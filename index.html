@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DIGI-UF - Digital Ultrafiltration Rate Calculator</title>
+
 
 <style>
 
@@ -345,6 +349,61 @@ input:focus {
 
 
 /* =====================================================
+   TINDAKAN
+===================================================== */
+
+.action-box {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.action-box.low {
+  background: #f0fdf4;
+  border-left: 5px solid #16a34a;
+}
+
+.action-box.warning {
+  background: #fffbeb;
+  border-left: 5px solid #eab308;
+}
+
+.action-box.high {
+  background: #fff1f2;
+  border-left: 5px solid #ef233c;
+}
+
+.action-title {
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 7px;
+}
+
+.action-text {
+  font-size: 12px;
+  color: #334155;
+}
+
+
+/* =====================================================
+   CATATAN SKRINING
+===================================================== */
+
+.screening-note {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+
+/* =====================================================
    TOMBOL CETAK
 ===================================================== */
 
@@ -445,6 +504,31 @@ input:focus {
   font-size: 11px;
   line-height: 1.6;
 }
+
+
+/* =====================================================
+   TINDAKAN RIWAYAT
+===================================================== */
+
+.history-action {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border-left: 4px solid #0f766e;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.history-action strong {
+  color: #17324d;
+}
+
+
+/* =====================================================
+   HAPUS
+===================================================== */
 
 .delete-history {
   margin-top: 10px;
@@ -560,7 +644,7 @@ footer {
 
 
 /* =====================================================
-   CETAK
+   PRINT
 ===================================================== */
 
 .print-only {
@@ -594,6 +678,7 @@ footer {
   .print-buttons {
     grid-template-columns: 1fr;
   }
+
 }
 
 
@@ -669,6 +754,14 @@ footer {
     font-weight: bold;
   }
 
+  .print-action {
+    margin-top: 15px;
+    padding: 12px;
+    border: 1px solid black;
+    line-height: 1.6;
+    font-size: 11px;
+  }
+
   .print-footer {
     margin-top: 20px;
     font-size: 10px;
@@ -678,12 +771,15 @@ footer {
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="app">
+
 
 <!-- ===================================================
      HEADER
@@ -715,6 +811,7 @@ footer {
 =================================================== -->
 
 <section class="dashboard">
+
 
   <div class="stat-card total">
 
@@ -807,6 +904,7 @@ footer {
 
   </div>
 
+
 </section>
 
 
@@ -815,6 +913,7 @@ footer {
 =================================================== -->
 
 <section class="card">
+
 
   <div class="card-title">
 
@@ -891,9 +990,12 @@ footer {
   </div>
 
 
-  <!-- KLASIFIKASI -->
+  <!-- =================================================
+       KLASIFIKASI
+  ================================================== -->
 
   <div class="classification-info">
+
 
     <div class="classification-title">
       📊 Klasifikasi DIGI-UF
@@ -944,6 +1046,7 @@ footer {
 
     </div>
 
+
   </div>
 
 
@@ -958,6 +1061,7 @@ footer {
 
   <div id="pesan"></div>
 
+
 </section>
 
 
@@ -969,6 +1073,7 @@ footer {
   class="card"
   id="hasilCard"
   style="display:none;">
+
 
   <div class="card-title">
 
@@ -986,9 +1091,12 @@ footer {
   <div id="hasil"></div>
 
 
-  <!-- CETAK -->
+  <!-- =================================================
+       CETAK
+  ================================================== -->
 
   <div class="print-buttons">
+
 
     <button
       class="print-btn print-last"
@@ -998,6 +1106,7 @@ footer {
 
     </button>
 
+
     <button
       class="print-btn print-history"
       onclick="cetakRiwayat()">
@@ -1006,7 +1115,9 @@ footer {
 
     </button>
 
+
   </div>
+
 
 </section>
 
@@ -1016,6 +1127,7 @@ footer {
 =================================================== -->
 
 <section class="card">
+
 
   <div class="card-title">
 
@@ -1041,6 +1153,7 @@ footer {
 
   </button>
 
+
 </section>
 
 
@@ -1049,6 +1162,7 @@ footer {
 =================================================== -->
 
 <section class="card">
+
 
   <div class="card-title">
 
@@ -1065,9 +1179,11 @@ footer {
 
   <div class="about-content">
 
+
     <h3>
       💧 Apa itu DIGI-UF?
     </h3>
+
 
     <p>
 
@@ -1123,6 +1239,7 @@ footer {
 
     <div class="about-classification">
 
+
       <div class="about-box green-box">
 
         <strong>
@@ -1161,6 +1278,7 @@ footer {
 
       </div>
 
+
     </div>
 
 
@@ -1168,30 +1286,85 @@ footer {
       🎯 Tujuan
     </h3>
 
+
     <p>
 
       DIGI-UF membantu tenaga kesehatan melakukan
       perhitungan UFR secara cepat serta memberikan
-      klasifikasi awal untuk mendukung pemantauan
-      pasien hemodialisis.
+      klasifikasi awal dan arahan tindak lanjut
+      untuk mendukung pemantauan pasien hemodialisis.
 
     </p>
+
+
+    <h3>
+      🩺 Tindak Lanjut Berdasarkan Kategori
+    </h3>
+
+
+    <div class="about-classification">
+
+
+      <div class="about-box green-box">
+
+        <strong>
+          🟢 RENDAH
+        </strong>
+
+        <span>
+          Pemantauan rutin selama hemodialisis.
+        </span>
+
+      </div>
+
+
+      <div class="about-box yellow-box">
+
+        <strong>
+          🟡 WASPADA
+        </strong>
+
+        <span>
+          Pemantauan lebih ketat dan evaluasi kondisi pasien.
+        </span>
+
+      </div>
+
+
+      <div class="about-box red-box">
+
+        <strong>
+          🔴 HIGH UFR
+        </strong>
+
+        <span>
+          Perlu perhatian klinis dan evaluasi lebih lanjut.
+        </span>
+
+      </div>
+
+
+    </div>
 
 
     <h3>
       ⚠️ Catatan Penting
     </h3>
 
+
     <p>
 
-      DIGI-UF merupakan alat bantu skrining dan
-      <strong>bukan pengganti penilaian klinis</strong>.
+      DIGI-UF merupakan <strong>alat bantu skrining</strong>
+      dan <strong>bukan pengganti penilaian klinis</strong>.
       Hasil skrining perlu dipertimbangkan bersama
-      kondisi klinis pasien dan keputusan tenaga kesehatan.
+      kondisi klinis pasien serta keputusan tenaga kesehatan.
+      Tindakan klinis tidak ditentukan secara otomatis oleh aplikasi.
 
     </p>
 
+
   </div>
+
 
 </section>
 
@@ -1206,6 +1379,7 @@ footer {
 
 </footer>
 
+
 </div>
 
 
@@ -1216,11 +1390,11 @@ footer {
 <div
   id="printArea"
   class="print-only">
-
 </div>
 
 
 <script>
+
 
 /* =====================================================
    BATAS KLASIFIKASI
@@ -1241,10 +1415,15 @@ let riwayatData =
 
 
 /* =====================================================
-   KLASIFIKASI
+   KLASIFIKASI UFR
 ===================================================== */
 
 function klasifikasiUFR(ufr) {
+
+
+  /* =========================
+     RENDAH
+  ========================== */
 
   if (ufr < BATAS_RENDAH) {
 
@@ -1257,12 +1436,19 @@ function klasifikasiUFR(ufr) {
       icon: "🟢",
 
       keterangan:
-        "UFR berada di bawah 10 mL/kg/jam."
+        "UFR berada di bawah 10 mL/kg/jam.",
+
+      tindakan:
+        "Lanjutkan pemantauan rutin selama hemodialisis dan evaluasi kondisi pasien sesuai standar pelayanan."
 
     };
 
   }
 
+
+  /* =========================
+     EARLY WARNING
+  ========================== */
 
   else if (ufr <= BATAS_HIGH) {
 
@@ -1276,12 +1462,19 @@ function klasifikasiUFR(ufr) {
       icon: "🟡",
 
       keterangan:
-        "UFR berada pada rentang 10–13 mL/kg/jam."
+        "UFR berada pada rentang 10–13 mL/kg/jam.",
+
+      tindakan:
+        "Lakukan pemantauan lebih ketat terhadap tekanan darah dan toleransi ultrafiltrasi. Evaluasi kembali target UF dan kondisi cairan pasien sesuai kondisi klinis."
 
     };
 
   }
 
+
+  /* =========================
+     HIGH UFR
+  ========================== */
 
   else {
 
@@ -1294,7 +1487,10 @@ function klasifikasiUFR(ufr) {
       icon: "🔴",
 
       keterangan:
-        "UFR lebih dari 13 mL/kg/jam."
+        "UFR lebih dari 13 mL/kg/jam.",
+
+      tindakan:
+        "Perlu perhatian klinis lebih lanjut. Evaluasi target UF, durasi hemodialisis, dan toleransi pasien serta lakukan pemantauan ketat terhadap risiko hipotensi intradialisis."
 
     };
 
@@ -1308,6 +1504,7 @@ function klasifikasiUFR(ufr) {
 ===================================================== */
 
 function hitungUFR() {
+
 
   const kode =
     document
@@ -1340,6 +1537,10 @@ function hitungUFR() {
     );
 
 
+  /* =========================
+     VALIDASI
+  ========================== */
+
   if (!kode || !bb || !uf || !durasi) {
 
     tampilkanPesan(
@@ -1366,7 +1567,9 @@ function hitungUFR() {
   }
 
 
-  /* RUMUS */
+  /* =========================
+     RUMUS UFR
+  ========================== */
 
   const ufr =
     uf / bb / durasi;
@@ -1378,13 +1581,17 @@ function hitungUFR() {
     );
 
 
-  /* KLASIFIKASI */
+  /* =========================
+     KLASIFIKASI
+  ========================== */
 
   const klasifikasi =
     klasifikasiUFR(ufr);
 
 
-  /* HASIL */
+  /* =========================
+     HASIL
+  ========================== */
 
   const hasilCard =
     document.getElementById(
@@ -1405,6 +1612,7 @@ function hitungUFR() {
   hasil.innerHTML = `
 
     <div class="result-box ${klasifikasi.kelas}">
+
 
       <div class="result-status">
 
@@ -1452,12 +1660,54 @@ function hitungUFR() {
 
       </div>
 
+
+      <!-- =========================================
+           TINDAKAN
+      ========================================== -->
+
+      <div class="action-box ${klasifikasi.kelas}">
+
+
+        <div class="action-title">
+
+          🩺 TINDAKAN / TINDAK LANJUT
+
+        </div>
+
+
+        <div class="action-text">
+
+          ${klasifikasi.tindakan}
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =========================================
+           CATATAN
+      ========================================== -->
+
+      <div class="screening-note">
+
+        ⚠️ <strong>Catatan:</strong>
+        Hasil ini merupakan skrining awal.
+        Keputusan klinis tetap berdasarkan
+        penilaian tenaga kesehatan dan kondisi pasien.
+
+      </div>
+
+
     </div>
 
   `;
 
 
-  /* SIMPAN */
+  /* =================================================
+     SIMPAN DATA
+  ================================================= */
+
 
   const dataBaru = {
 
@@ -1479,6 +1729,12 @@ function hitungUFR() {
     kelas:
       klasifikasi.kelas,
 
+    keterangan:
+      klasifikasi.keterangan,
+
+    tindakan:
+      klasifikasi.tindakan,
+
     tanggal:
       new Date()
         .toLocaleString("id-ID")
@@ -1499,6 +1755,10 @@ function hitungUFR() {
   );
 
 
+  /* =================================================
+     UPDATE
+  ================================================= */
+
   updateDashboard();
 
   tampilkanRiwayat();
@@ -1509,6 +1769,10 @@ function hitungUFR() {
     "green"
   );
 
+
+  /* =================================================
+     SCROLL KE HASIL
+  ================================================= */
 
   setTimeout(function() {
 
@@ -1533,6 +1797,7 @@ function tampilkanPesan(
   teks,
   warna
 ) {
+
 
   const pesan =
     document.getElementById(
@@ -1566,6 +1831,7 @@ function tampilkanPesan(
 ===================================================== */
 
 function updateDashboard() {
+
 
   const total =
     riwayatData.length;
@@ -1624,6 +1890,7 @@ function updateDashboard() {
 
 function tampilkanRiwayat() {
 
+
   const container =
     document.getElementById(
       "riwayat"
@@ -1652,11 +1919,14 @@ function tampilkanRiwayat() {
     riwayatData
       .map(function(item) {
 
+
         return `
 
           <div class="history-item">
 
+
             <div class="history-top">
+
 
               <div class="history-code">
 
@@ -1670,6 +1940,7 @@ function tampilkanRiwayat() {
                 ${item.tanggal}
 
               </div>
+
 
             </div>
 
@@ -1693,12 +1964,31 @@ function tampilkanRiwayat() {
             <div class="history-detail">
 
               BB: ${item.bb} kg
+
               <br>
 
               UF: ${item.uf} mL
+
               <br>
 
               Durasi: ${item.durasi} jam
+
+            </div>
+
+
+            <!-- =====================================
+                 TINDAKAN RIWAYAT
+            ====================================== -->
+
+            <div class="history-action">
+
+              <strong>
+                🩺 Tindakan:
+              </strong>
+
+              <br>
+
+              ${item.tindakan || "Tidak tersedia"}
 
             </div>
 
@@ -1711,6 +2001,7 @@ function tampilkanRiwayat() {
 
             </button>
 
+
           </div>
 
         `;
@@ -1722,10 +2013,11 @@ function tampilkanRiwayat() {
 
 
 /* =====================================================
-   HAPUS SATU
+   HAPUS SATU RIWAYAT
 ===================================================== */
 
 function hapusRiwayat(id) {
+
 
   const yakin =
     confirm(
@@ -1759,10 +2051,11 @@ function hapusRiwayat(id) {
 
 
 /* =====================================================
-   HAPUS SEMUA
+   HAPUS SEMUA RIWAYAT
 ===================================================== */
 
 function hapusSemuaRiwayat() {
+
 
   if (
     riwayatData.length === 0
@@ -1812,6 +2105,7 @@ function hapusSemuaRiwayat() {
 
 function cetakRiwayat() {
 
+
   if (
     riwayatData.length === 0
   ) {
@@ -1829,6 +2123,7 @@ function cetakRiwayat() {
 
   riwayatData.forEach(
     function(item, index) {
+
 
       rows += `
 
@@ -1883,6 +2178,7 @@ function cetakRiwayat() {
   printArea.innerHTML = `
 
     <div class="print-container">
+
 
       <div class="print-header">
 
@@ -1966,6 +2262,7 @@ function cetakRiwayat() {
 
         </thead>
 
+
         <tbody>
 
           ${rows}
@@ -1973,6 +2270,48 @@ function cetakRiwayat() {
         </tbody>
 
       </table>
+
+
+      <!-- =========================================
+           RINGKASAN TINDAKAN
+      ========================================== -->
+
+      <div class="print-action">
+
+        <strong>
+          TINDAK LANJUT BERDASARKAN KLASIFIKASI
+        </strong>
+
+        <br><br>
+
+        <strong>
+          RENDAH (&lt;10 mL/kg/jam):
+        </strong>
+
+        Lanjutkan pemantauan rutin selama hemodialisis
+        dan evaluasi kondisi pasien sesuai standar pelayanan.
+
+        <br><br>
+
+        <strong>
+          EARLY WARNING / WASPADA (10–13 mL/kg/jam):
+        </strong>
+
+        Lakukan pemantauan lebih ketat terhadap tekanan darah
+        dan toleransi ultrafiltrasi. Evaluasi kembali target UF
+        dan kondisi cairan pasien sesuai kondisi klinis.
+
+        <br><br>
+
+        <strong>
+          HIGH UFR (&gt;13 mL/kg/jam):
+        </strong>
+
+        Perlu perhatian klinis lebih lanjut. Evaluasi target UF,
+        durasi hemodialisis, dan toleransi pasien serta lakukan
+        pemantauan ketat terhadap risiko hipotensi intradialisis.
+
+      </div>
 
 
       <div class="print-footer">
@@ -2000,8 +2339,11 @@ function cetakRiwayat() {
 
         DIGI-UF merupakan alat bantu skrining
         dan bukan pengganti penilaian klinis.
+        Keputusan klinis tetap berdasarkan
+        penilaian tenaga kesehatan dan kondisi pasien.
 
       </div>
+
 
     </div>
 
@@ -2018,6 +2360,7 @@ function cetakRiwayat() {
 ===================================================== */
 
 function cetakHasilTerakhir() {
+
 
   if (
     riwayatData.length === 0
@@ -2045,6 +2388,7 @@ function cetakHasilTerakhir() {
 
     <div class="print-container">
 
+
       <div class="print-header">
 
         <h1>
@@ -2071,6 +2415,7 @@ function cetakHasilTerakhir() {
         <strong>
           Kode Sesi:
         </strong>
+
         ${item.kode}
 
         <br>
@@ -2078,6 +2423,7 @@ function cetakHasilTerakhir() {
         <strong>
           Tanggal:
         </strong>
+
         ${item.tanggal}
 
       </div>
@@ -2103,6 +2449,7 @@ function cetakHasilTerakhir() {
 
 
         <tbody>
+
 
           <tr>
 
@@ -2150,9 +2497,11 @@ function cetakHasilTerakhir() {
             </td>
 
             <td>
+
               <strong>
                 ${item.ufr} mL/kg/jam
               </strong>
+
             </td>
 
           </tr>
@@ -2165,22 +2514,42 @@ function cetakHasilTerakhir() {
             </td>
 
             <td>
+
               <strong>
                 ${item.kategori}
               </strong>
+
             </td>
 
           </tr>
+
 
         </tbody>
 
       </table>
 
 
+      <!-- =========================================
+           TINDAKAN
+      ========================================== -->
+
+      <div class="print-action">
+
+        <strong>
+          🩺 TINDAKAN / TINDAK LANJUT
+        </strong>
+
+        <br><br>
+
+        ${item.tindakan || "Tidak tersedia."}
+
+      </div>
+
+
       <div class="print-footer">
 
         <strong>
-          Klasifikasi DIGI-UF:
+          Keterangan Klasifikasi:
         </strong>
 
         <br>
@@ -2202,8 +2571,11 @@ function cetakHasilTerakhir() {
 
         DIGI-UF merupakan alat bantu skrining
         dan bukan pengganti penilaian klinis.
+        Keputusan klinis tetap berdasarkan
+        penilaian tenaga kesehatan dan kondisi pasien.
 
       </div>
+
 
     </div>
 
@@ -2216,7 +2588,7 @@ function cetakHasilTerakhir() {
 
 
 /* =====================================================
-   LOAD
+   LOAD APLIKASI
 ===================================================== */
 
 document.addEventListener(
@@ -2232,5 +2604,7 @@ document.addEventListener(
 
 </script>
 
+
 </body>
+
 </html>
