@@ -1,72 +1,542 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#087f78">
 
 <title>DIGI-UF - Digital UF Calculator</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f1f5f9;
-    color: #1e293b;
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f8fa;
+    color: #17324d;
 }
 
-header {
-    background: linear-gradient(135deg, #0f766e, #115e59);
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --primary: #087f78;
+    --primary-dark: #05645f;
+    --primary-light: #e5f6f4;
+
+    --blue: #1683d8;
+    --blue-light: #eaf5ff;
+
+    --green: #159b68;
+    --green-light: #eaf9f2;
+
+    --orange: #ed9b16;
+    --orange-light: #fff6df;
+
+    --red: #df3d45;
+    --red-light: #fff0f1;
+
+    --purple: #7047c8;
+    --purple-light: #f3efff;
+
+    --dark: #123f45;
+    --text: #17324d;
+    --muted: #708092;
+
+    --border: #dce7eb;
+
+    --shadow:
+        0 8px 30px rgba(22, 60, 76, 0.08);
+
+    --radius: 18px;
+}
+
+
+/* =========================================================
+   APP LAYOUT
+========================================================= */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 245px;
+    min-height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #075e62 0%,
+            #064f56 45%,
+            #043e49 100%
+        );
+
     color: white;
-    padding: 28px 20px;
-    text-align: center;
+
+    padding: 22px 16px;
+
+    z-index: 100;
+
+    overflow-y: auto;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 30px;
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 4px 8px 22px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
 }
 
-header p {
-    margin: 8px 0 0;
+.logo-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+.logo h1 {
+    font-size: 22px;
+    letter-spacing: .5px;
+}
+
+.logo span {
+    display: block;
+    font-size: 11px;
+    margin-top: 3px;
+    opacity: .75;
+}
+
+
+/* NAV */
+
+.nav {
+    margin-top: 22px;
+}
+
+.nav-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    opacity: .55;
+
+    padding:
+        0 12px
+        9px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        12px
+        13px;
+
+    margin-bottom: 5px;
+
+    color: rgba(255,255,255,.8);
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
     font-size: 14px;
-    opacity: 0.9;
+
+    transition: .2s;
 }
 
-.container {
-    width: 94%;
-    max-width: 1050px;
-    margin: 25px auto;
+.nav-item:hover {
+    background:
+        rgba(255,255,255,.09);
+
+    color: white;
 }
+
+.nav-item.active {
+    background:
+        rgba(23, 197, 185, .28);
+
+    color: white;
+
+    box-shadow:
+        inset 3px 0 0
+        #67e8dc;
+}
+
+.nav-icon {
+    width: 25px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/* SIDE INFORMATION */
+
+.sidebar-info {
+    margin-top: 25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    border-radius: 16px;
+
+    padding: 16px;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+.sidebar-info h3 {
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.sidebar-info p {
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.78);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    min-height: 82px;
+
+    background: white;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    padding:
+        15px
+        34px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 50;
+}
+
+.page-title h2 {
+    font-size: 24px;
+    color: var(--dark);
+}
+
+.page-title p {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.datetime {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding:
+        10px 15px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 13px;
+
+    background: #fff;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,.04);
+}
+
+.datetime-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        var(--primary-light);
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+.datetime strong {
+    display: block;
+    font-size: 12px;
+}
+
+.datetime small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+    padding:
+        28px 34px 40px;
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        var(--radius);
+
+    padding: 19px;
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    transition: .25s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(22,60,76,.12);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+.stat-card.total .stat-icon {
+    background: var(--primary-light);
+}
+
+.stat-card.high .stat-icon {
+    background: var(--red-light);
+}
+
+.stat-card.warning .stat-icon {
+    background: var(--orange-light);
+}
+
+.stat-card.low .stat-icon {
+    background: var(--blue-light);
+}
+
+.stat-info small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.stat-info strong {
+    display: block;
+    font-size: 27px;
+    margin-top: 3px;
+    color: var(--dark);
+}
+
+.stat-info span {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .card {
     background: white;
-    border-radius: 18px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow);
+
     padding: 24px;
+
     margin-bottom: 20px;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 6px;
+}
+
+.section-number {
+    width: 31px;
+    height: 31px;
+
+    border-radius: 9px;
+
+    background:
+        var(--primary);
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .card h2 {
-    margin-top: 0;
-    color: #0f766e;
-    font-size: 20px;
+    font-size: 19px;
+    color: var(--dark);
 }
 
-.subtitle {
-    color: #64748b;
-    font-size: 14px;
-    margin-bottom: 20px;
+.card-description {
+    color: var(--muted);
+    font-size: 12px;
+    margin:
+        0 0 22px 43px;
 }
 
-.grid {
+
+/* =========================================================
+   INPUT + FORMULA LAYOUT
+========================================================= */
+
+.input-layout {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        1.5fr 0.8fr;
+
+    gap: 22px;
+}
+
+.input-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 16px;
 }
 
@@ -76,298 +546,970 @@ header p {
 }
 
 .form-group label {
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 700;
+    color: #29445c;
+
     margin-bottom: 7px;
-    font-size: 14px;
 }
 
-.form-group input {
-    padding: 13px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 15px;
+.label-required {
+    color: var(--red);
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap input {
+    width: 100%;
+
+    height: 47px;
+
+    border:
+        1px solid
+        #cfdee4;
+
+    border-radius:
+        11px;
+
+    padding:
+        0 15px;
+
+    font-size: 13px;
+
+    color: var(--text);
+
     outline: none;
+
+    background: #fff;
+
+    transition: .2s;
 }
 
-.form-group input:focus {
-    border-color: #0f766e;
-    box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
+.input-wrap input:focus {
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(8,127,120,.10);
 }
 
-.full {
-    grid-column: 1 / -1;
+.input-wrap input::placeholder {
+    color: #9aa9b5;
 }
 
-button {
-    border: none;
+
+/* =========================================================
+   FORMULA CARD
+========================================================= */
+
+.formula-card {
+    background:
+        linear-gradient(
+            145deg,
+            #effaf8,
+            #f7fcfb
+        );
+
+    border:
+        1px solid
+        #d7eee9;
+
+    border-radius: 16px;
+
+    padding: 19px;
+}
+
+.formula-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--dark);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 16px;
+}
+
+.formula-symbol {
+    width: 33px;
+    height: 33px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 10px;
-    padding: 13px 18px;
-    font-size: 15px;
+
+    background:
+        #d8f3ee;
+
+    color:
+        var(--primary);
+
+    font-size: 19px;
+}
+
+.formula-block {
+    margin-bottom: 16px;
+}
+
+.formula-block:last-child {
+    margin-bottom: 0;
+}
+
+.formula-block label {
+    font-size: 10px;
+    color: var(--primary);
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
+    display: block;
+    margin-bottom: 6px;
 }
 
-button:hover {
-    transform: translateY(-1px);
+.formula {
+    background:
+        rgba(8,127,120,.07);
+
+    border-radius: 10px;
+
+    padding: 11px;
+
+    color: #145d5a;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    font-weight: 600;
 }
 
-.btn-primary {
-    background: #0f766e;
-    color: white;
+.formula-note {
+    display: flex;
+    gap: 7px;
+
+    margin-top: 15px;
+
+    color: #5f7c82;
+
+    font-size: 10px;
+
+    line-height: 1.6;
 }
 
-.btn-secondary {
-    background: #e2e8f0;
-    color: #334155;
-}
 
-.btn-danger {
-    background: #dc2626;
-    color: white;
-}
-
-.btn-print {
-    background: #334155;
-    color: white;
-}
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .button-row {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
+
     margin-top: 20px;
+
+    flex-wrap: wrap;
 }
 
-/* HASIL */
+.btn {
+    border: none;
+
+    border-radius: 11px;
+
+    min-height: 44px;
+
+    padding:
+        0 19px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background:
+        linear-gradient(
+            135deg,
+            #078b82,
+            #06736e
+        );
+
+    color: white;
+
+    box-shadow:
+        0 7px 18px
+        rgba(8,127,120,.2);
+}
+
+.btn-secondary {
+    background:
+        #edf3f6;
+
+    color:
+        #36516a;
+}
+
+.btn-danger {
+    background:
+        #fff0f1;
+
+    color:
+        var(--red);
+
+    border:
+        1px solid
+        #ffd0d3;
+}
+
+.btn-excel {
+    background:
+        #effaf5;
+
+    color:
+        #16805b;
+
+    border:
+        1px solid
+        #c8eddd;
+}
+
+.btn-print {
+    background:
+        #eef5ff;
+
+    color:
+        #2673b8;
+
+    border:
+        1px solid
+        #d3e6fa;
+}
+
+
+/* =========================================================
+   RESULT CARDS
+========================================================= */
 
 .result-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 15px;
+
+    margin-top: 20px;
 }
 
-.result-box {
-    background: #f8fafc;
-    border-radius: 14px;
+.result-card {
+    border-radius: 16px;
+
     padding: 20px;
-    text-align: center;
-    border: 1px solid #e2e8f0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 130px;
 }
 
-.result-box .label {
-    font-size: 13px;
-    color: #64748b;
+.result-card.weight {
+    background:
+        linear-gradient(
+            135deg,
+            #eefaf5,
+            #f8fcfa
+        );
+
+    border:
+        1px solid
+        #d9eee5;
+}
+
+.result-card.uf {
+    background:
+        linear-gradient(
+            135deg,
+            #eef7ff,
+            #f8fbff
+        );
+
+    border:
+        1px solid
+        #d8eaff;
+}
+
+.result-card.ufr {
+    background:
+        linear-gradient(
+            135deg,
+            #f4f0ff,
+            #fbf9ff
+        );
+
+    border:
+        1px solid
+        #e3dafa;
+}
+
+.result-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+.weight .result-icon {
+    background: #dcf5e9;
+}
+
+.uf .result-icon {
+    background: #deefff;
+}
+
+.ufr .result-icon {
+    background: #e9e0ff;
+}
+
+.result-title {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.weight .result-title {
+    color: #278161;
+}
+
+.uf .result-title {
+    color: #2877ba;
+}
+
+.ufr .result-title {
+    color: #6941b7;
+}
+
+.result-value {
+    margin-top: 14px;
+
+    font-size: 30px;
+
+    font-weight: 800;
+}
+
+.weight .result-value {
+    color: #16825e;
+}
+
+.uf .result-value {
+    color: #197dc5;
+}
+
+.ufr .result-value {
+    color: #6941bd;
+}
+
+.result-unit {
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-box {
+    margin-top: 15px;
+
+    border-radius: 16px;
+
+    padding: 19px 21px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    transition: .3s;
+}
+
+.status-icon {
+    width: 49px;
+    height: 49px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+.status-content small {
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+}
+
+.status-content strong {
+    display: block;
+
+    font-size: 24px;
+
+    margin-top: 3px;
+}
+
+.status-content p {
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+/* DEFAULT */
+
+.status-empty {
+    background:
+        #f3f6f8;
+
+    border:
+        1px solid
+        #e1e8ec;
+
+    color:
+        #72818d;
+}
+
+
+/* LOW */
+
+.status-low {
+    background:
+        linear-gradient(
+            90deg,
+            #eafaf2,
+            #f7fcfa
+        );
+
+    border:
+        1px solid
+        #cdeedc;
+
+    color:
+        #14845c;
+}
+
+.status-low .status-icon {
+    background:
+        #d4f3e2;
+}
+
+
+/* WARNING */
+
+.status-warning {
+    background:
+        linear-gradient(
+            90deg,
+            #fff8e5,
+            #fffdf7
+        );
+
+    border:
+        1px solid
+        #f7df9f;
+
+    color:
+        #a06a08;
+}
+
+.status-warning .status-icon {
+    background:
+        #ffedbc;
+}
+
+
+/* HIGH */
+
+.status-high {
+    background:
+        linear-gradient(
+            90deg,
+            #fff0f1,
+            #fff8f8
+        );
+
+    border:
+        1px solid
+        #ffcdd1;
+
+    color:
+        #d6343d;
+}
+
+.status-high .status-icon {
+    background:
+        #ffdadd;
+}
+
+
+/* =========================================================
+   CLASSIFICATION
+========================================================= */
+
+.classification-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 18px;
+}
+
+.classification {
+    padding: 18px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    border: 1px solid;
+}
+
+.classification.low {
+    background: #f2fbf7;
+    border-color: #c7e9d9;
+    color: #16815c;
+}
+
+.classification.warning {
+    background: #fffaf0;
+    border-color: #f5dda3;
+    color: #a56b09;
+}
+
+.classification.high {
+    background: #fff4f4;
+    border-color: #ffc7cb;
+    color: #d83a42;
+}
+
+.classification-icon {
+    font-size: 26px;
     margin-bottom: 8px;
 }
 
-.result-box .value {
-    font-size: 25px;
-    font-weight: bold;
-    color: #0f766e;
+.classification strong {
+    display: block;
+    font-size: 15px;
 }
 
-.result-box .unit {
-    font-size: 12px;
-    color: #64748b;
+.classification span {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
 }
 
-/* STATUS */
 
-.status {
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-}
+/* =========================================================
+   TABLE
+========================================================= */
 
-.status-low {
-    background: #dcfce7;
-    color: #166534;
-    border: 1px solid #86efac;
-}
-
-.status-warning {
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fcd34d;
-}
-
-.status-high {
-    background: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
-}
-
-.status-empty {
-    background: #f1f5f9;
-    color: #64748b;
-}
-
-/* INFO */
-
-.info-box {
-    background: #ecfeff;
-    border-left: 5px solid #0f766e;
-    padding: 16px;
-    border-radius: 10px;
-    margin-top: 15px;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-.warning-box {
-    background: #fff7ed;
-    border-left: 5px solid #f97316;
-    padding: 16px;
-    border-radius: 10px;
-    margin-top: 15px;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-/* DASHBOARD */
-
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.dashboard-card {
-    background: white;
-    padding: 22px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-}
-
-.dashboard-card .title {
-    font-size: 13px;
-    color: #64748b;
-}
-
-.dashboard-card .number {
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 8px;
-    color: #0f766e;
-}
-
-/* TABLE */
-
-.table-wrapper {
+.table-container {
     overflow-x: auto;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 13px;
+
+    margin-top: 18px;
 }
 
 table {
     width: 100%;
+
     border-collapse: collapse;
-    min-width: 950px;
+
+    min-width: 980px;
 }
 
-th,
-td {
-    padding: 11px 9px;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: center;
-    font-size: 13px;
-}
+thead th {
+    background:
+        #075f63;
 
-th {
-    background: #0f766e;
     color: white;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    padding:
+        12px 9px;
+
+    white-space: nowrap;
 }
 
-tr:hover {
-    background: #f8fafc;
+tbody td {
+    padding:
+        12px 9px;
+
+    border-bottom:
+        1px solid
+        #e8eef1;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    white-space: nowrap;
 }
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background:
+        #f7fbfb;
+}
+
+
+/* BADGE */
 
 .badge {
-    display: inline-block;
-    padding: 5px 9px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: bold;
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        5px 9px;
+
+    border-radius:
+        20px;
+
+    font-size: 9px;
+
+    font-weight: 800;
 }
 
 .badge-low {
-    background: #dcfce7;
-    color: #166534;
+    color: #12815b;
+    background: #e4f7ed;
 }
 
 .badge-warning {
-    background: #fef3c7;
-    color: #92400e;
+    color: #9a6506;
+    background: #fff0c9;
 }
 
 .badge-high {
-    background: #fee2e2;
-    color: #991b1b;
+    color: #cf3039;
+    background: #ffe0e3;
 }
 
-/* FOOTER */
 
-footer {
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+    padding: 35px 20px;
+
     text-align: center;
-    padding: 25px;
-    color: #64748b;
+
+    color: var(--muted);
+}
+
+.empty-state-icon {
+    font-size: 35px;
+    opacity: .55;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.3fr .7fr;
+
+    gap: 18px;
+}
+
+.about-text {
     font-size: 13px;
+    line-height: 1.8;
+    color: #506879;
 }
 
-/* PRINT */
-
-@media print {
-
-    body {
-        background: white;
-    }
-
-    header {
-        background: white;
-        color: black;
-        border-bottom: 2px solid black;
-    }
-
-    .no-print,
-    button,
-    footer {
-        display: none !important;
-    }
-
-    .card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-    }
-
-    .container {
-        width: 100%;
-        max-width: none;
-    }
-
-    .result-box {
-        border: 1px solid #aaa;
-    }
-
-    @page {
-        size: A4;
-        margin: 15mm;
-    }
+.about-text strong {
+    color: var(--primary);
 }
 
-/* MOBILE */
+.tip-box {
+    border-radius: 15px;
 
-@media (max-width: 700px) {
+    padding: 18px;
 
-    header h1 {
-        font-size: 24px;
-    }
+    background:
+        linear-gradient(
+            135deg,
+            #effaf8,
+            #f6fbff
+        );
 
-    .grid,
-    .result-grid,
+    border:
+        1px solid
+        #dcefeb;
+}
+
+.tip-box h3 {
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.tip-box p {
+    color: #5c7180;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    margin-left: 245px;
+
+    background:
+        #06464e;
+
+    color: white;
+
+    padding:
+        19px 34px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 11px;
+}
+
+.footer strong {
+    font-size: 12px;
+}
+
+.footer span {
+    opacity: .65;
+}
+
+
+/* =========================================================
+   MOBILE HEADER
+========================================================= */
+
+.mobile-menu {
+    display: none;
+
+    border: none;
+
+    background:
+        var(--primary);
+
+    color: white;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    background:
+        #173f45;
+
+    color: white;
+
+    padding:
+        13px 18px;
+
+    border-radius: 11px;
+
+    font-size: 12px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.18);
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 999;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
     .dashboard {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .input-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        transform:
+            translateX(-100%);
+
+        transition: .3s;
+    }
+
+    .sidebar.open {
+        transform:
+            translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    .footer {
+        margin-left: 0;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .topbar {
+        padding:
+            12px 18px;
+    }
+
+    .page-title h2 {
+        font-size: 19px;
+    }
+
+    .page-title p {
+        font-size: 10px;
+    }
+
+    .datetime {
+        display: none;
+    }
+
+    .content {
+        padding:
+            20px 15px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .dashboard,
+    .result-grid,
+    .classification-grid,
+    .input-grid {
         grid-template-columns: 1fr;
     }
 
@@ -375,562 +1517,1271 @@ footer {
         padding: 18px;
     }
 
+    .card-description {
+        margin-left: 0;
+    }
+
     .button-row {
         flex-direction: column;
     }
 
-    button {
+    .btn {
         width: 100%;
     }
+
+    .footer {
+        flex-direction: column;
+        gap: 7px;
+        text-align: center;
+    }
 }
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .sidebar,
+    .topbar,
+    .mobile-menu,
+    .no-print,
+    .button-row,
+    .footer {
+        display: none !important;
+    }
+
+    .main {
+        width: 100%;
+        margin: 0;
+    }
+
+    .content {
+        padding: 0;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+
+    .dashboard {
+        grid-template-columns:
+            repeat(4, 1fr);
+    }
+
+    .result-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+}
+
 </style>
 </head>
 
+
 <body>
 
-<header>
-    <h1>💧 DIGI-UF</h1>
-    <p>Digital Ultrafiltration Rate Calculator</p>
-    <p>Alat Bantu Skrining Dini Risiko High Ultrafiltration Rate</p>
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            💧
+        </div>
+
+        <div>
+            <h1>DIGI-UF</h1>
+            <span>Digital UF Calculator</span>
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <div class="nav-title">
+            Menu Utama
+        </div>
+
+        <a href="#beranda"
+           class="nav-item active">
+
+            <span class="nav-icon">⌂</span>
+
+            Beranda
+
+        </a>
+
+
+        <a href="#kalkulasi"
+           class="nav-item">
+
+            <span class="nav-icon">▣</span>
+
+            Kalkulasi
+
+        </a>
+
+
+        <a href="#riwayat"
+           class="nav-item">
+
+            <span class="nav-icon">◴</span>
+
+            Riwayat
+
+        </a>
+
+
+        <a href="#informasi"
+           class="nav-item">
+
+            <span class="nav-icon">ⓘ</span>
+
+            Informasi
+
+        </a>
+
+
+        <a href="#tentang"
+           class="nav-item">
+
+            <span class="nav-icon">♧</span>
+
+            Tentang
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-info">
+
+        <h3>💡 Tentang DIGI-UF</h3>
+
+        <p>
+            Alat bantu digital untuk menghitung
+            UFR dan melakukan skrining dini
+            risiko High Ultrafiltration Rate
+            pada pasien hemodialisis.
+        </p>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <button
+        class="mobile-menu"
+        onclick="toggleSidebar()">
+
+        ☰
+
+    </button>
+
+
+    <div class="page-title">
+
+        <h2>DIGI-UF</h2>
+
+        <p>
+            Alat Bantu Skrining Dini Risiko High Ultrafiltration Rate
+        </p>
+
+    </div>
+
+
+    <div class="datetime">
+
+        <div class="datetime-icon">
+            📅
+        </div>
+
+        <div>
+
+            <strong id="tanggalSekarang">
+                -
+            </strong>
+
+            <small id="jamSekarang">
+                -
+            </small>
+
+        </div>
+
+    </div>
+
 </header>
 
-<div class="container">
 
-    <!-- DASHBOARD -->
+<div class="content" id="beranda">
 
-    <div class="dashboard no-print">
 
-        <div class="dashboard-card">
-            <div class="title">Total Skrining</div>
-            <div class="number" id="totalSkrining">0</div>
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="dashboard">
+
+
+    <div class="stat-card total">
+
+        <div class="stat-icon">
+            👥
         </div>
 
-        <div class="dashboard-card">
-            <div class="title">High UFR</div>
-            <div class="number" id="totalHigh">0</div>
-        </div>
+        <div class="stat-info">
 
-    </div>
+            <small>Total Skrining</small>
 
+            <strong id="totalSkrining">
+                0
+            </strong>
 
-    <!-- INPUT -->
-
-    <div class="card">
-
-        <h2>📋 Data Pasien</h2>
-
-        <div class="subtitle">
-            Masukkan data pasien untuk melakukan estimasi UF Goal dan skrining risiko UFR.
-        </div>
-
-        <div class="grid">
-
-            <div class="form-group">
-                <label>Kode Sesi</label>
-                <input
-                    type="text"
-                    id="kodeSesi"
-                    placeholder="Contoh: HD001">
-            </div>
-
-            <div class="form-group">
-                <label>BB Pre-HD (kg)</label>
-                <input
-                    type="number"
-                    id="bbPre"
-                    min="1"
-                    step="0.1"
-                    placeholder="Contoh: 60">
-            </div>
-
-            <div class="form-group">
-                <label>Dry Weight / Berat Badan Kering (kg)</label>
-                <input
-                    type="number"
-                    id="dryWeight"
-                    min="1"
-                    step="0.1"
-                    placeholder="Contoh: 57">
-            </div>
-
-            <div class="form-group">
-                <label>Cairan Masuk Selama HD (mL)</label>
-                <input
-                    type="number"
-                    id="cairanMasuk"
-                    min="0"
-                    step="1"
-                    placeholder="Contoh: 300">
-            </div>
-
-            <div class="form-group">
-                <label>Durasi Hemodialisis (jam)</label>
-                <input
-                    type="number"
-                    id="durasi"
-                    min="1"
-                    step="0.5"
-                    placeholder="Contoh: 4">
-            </div>
-
-        </div>
-
-        <div class="button-row no-print">
-
-            <button
-                class="btn-primary"
-                onclick="hitungDIGIUF()">
-                🧮 Hitung DIGI-UF
-            </button>
-
-            <button
-                class="btn-secondary"
-                onclick="resetForm()">
-                ↻ Reset
-            </button>
+            <span>sesi</span>
 
         </div>
 
     </div>
 
 
-    <!-- HASIL -->
+    <div class="stat-card high">
 
-    <div class="card" id="hasilCard">
+        <div class="stat-icon">
+            🛡️
+        </div>
 
-        <h2>📊 Hasil Perhitungan</h2>
+        <div class="stat-info">
 
-        <div class="result-grid">
+            <small>High UFR</small>
 
-            <div class="result-box">
+            <strong id="totalHigh">
+                0
+            </strong>
 
-                <div class="label">
-                    Selisih BB Pre-HD dengan Dry Weight
+            <span>sesi</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card warning">
+
+        <div class="stat-icon">
+            ⚠️
+        </div>
+
+        <div class="stat-info">
+
+            <small>Waspada</small>
+
+            <strong id="totalWarning">
+                0
+            </strong>
+
+            <span>sesi</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card low">
+
+        <div class="stat-icon">
+            ✓
+        </div>
+
+        <div class="stat-info">
+
+            <small>Rendah</small>
+
+            <strong id="totalLow">
+                0
+            </strong>
+
+            <span>sesi</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INPUT
+===================================================== -->
+
+<section
+    class="card"
+    id="kalkulasi">
+
+
+    <div class="card-header">
+
+        <div class="section-number">
+            1
+        </div>
+
+        <h2>Data Pasien</h2>
+
+    </div>
+
+
+    <p class="card-description">
+
+        Masukkan data pasien untuk estimasi UF Goal
+        dan skrining risiko UFR.
+
+    </p>
+
+
+    <div class="input-layout">
+
+
+        <div>
+
+
+            <div class="input-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Kode Sesi
+                        <span class="label-required">*</span>
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="text"
+                            id="kodeSesi"
+                            placeholder="Contoh: HD001">
+
+                    </div>
+
                 </div>
 
-                <div class="value" id="selisihBB">
+
+                <div class="form-group">
+
+                    <label>
+                        BB Pre-HD (kg)
+                        <span class="label-required">*</span>
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="number"
+                            id="bbPre"
+                            min="1"
+                            step="0.1"
+                            placeholder="Contoh: 60">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Dry Weight / BB Kering (kg)
+                        <span class="label-required">*</span>
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="number"
+                            id="dryWeight"
+                            min="1"
+                            step="0.1"
+                            placeholder="Contoh: 57">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Cairan Masuk Selama HD (mL)
+                        <span class="label-required">*</span>
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="number"
+                            id="cairanMasuk"
+                            min="0"
+                            step="1"
+                            placeholder="Contoh: 300">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Durasi Hemodialisis (jam)
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="number"
+                            id="durasi"
+                            min="1"
+                            step="0.5"
+                            placeholder="Contoh: 4">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="button-row no-print">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="hitungDIGIUF()">
+
+                    🧮
+
+                    Hitung DIGI-UF
+
+                </button>
+
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="resetForm()">
+
+                    ↻
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- FORMULA -->
+
+        <div class="formula-card">
+
+
+            <div class="formula-title">
+
+                <div class="formula-symbol">
+                    Σ
+                </div>
+
+                Rumus yang Digunakan
+
+            </div>
+
+
+            <div class="formula-block">
+
+                <label>
+                    ESTIMASI UF GOAL — FITUR PENDUKUNG
+                </label>
+
+                <div class="formula">
+
+                    (BB Pre-HD − Dry Weight)
+                    × 1000
+                    + Cairan Masuk
+
+                </div>
+
+            </div>
+
+
+            <div class="formula-block">
+
+                <label>
+                    UFR — FITUR UTAMA
+                </label>
+
+                <div class="formula">
+
+                    UF Goal ÷
+                    (BB Pre-HD × Durasi HD)
+
+                </div>
+
+            </div>
+
+
+            <div class="formula-note">
+
+                ⓘ
+
+                <span>
+                    UF Goal merupakan estimasi untuk
+                    informasi pendukung dan bukan penetapan
+                    target UF klinis.
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HASIL
+===================================================== -->
+
+<section class="card">
+
+
+    <div class="card-header">
+
+        <div class="section-number">
+            2
+        </div>
+
+        <h2>Hasil Perhitungan</h2>
+
+    </div>
+
+
+    <p class="card-description">
+
+        Hasil estimasi UF Goal dan perhitungan UFR
+        berdasarkan data yang dimasukkan.
+
+    </p>
+
+
+    <div class="result-grid">
+
+
+        <div class="result-card weight">
+
+            <div class="result-top">
+
+                <div class="result-icon">
+                    ⚖️
+                </div>
+
+                <div class="result-title">
+                    SELISIH BB PRE-HD − DRY WEIGHT
+                </div>
+
+            </div>
+
+
+            <div class="result-value">
+
+                <span id="selisihBB">
                     -
-                </div>
+                </span>
 
-                <div class="unit">
+                <span class="result-unit">
                     kg
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card uf">
+
+            <div class="result-top">
+
+                <div class="result-icon">
+                    💧
+                </div>
+
+                <div class="result-title">
+                    ESTIMASI UF GOAL
                 </div>
 
             </div>
 
 
-            <div class="result-box">
+            <div class="result-value">
 
-                <div class="label">
-                    Estimasi UF Goal
-                </div>
-
-                <div class="value" id="ufGoal">
+                <span id="ufGoal">
                     -
-                </div>
+                </span>
 
-                <div class="unit">
+                <span class="result-unit">
                     mL
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card ufr">
+
+            <div class="result-top">
+
+                <div class="result-icon">
+                    ◉
+                </div>
+
+                <div class="result-title">
+                    UFR — FITUR UTAMA
                 </div>
 
             </div>
 
 
-            <div class="result-box">
+            <div class="result-value">
 
-                <div class="label">
-                    UFR
-                </div>
-
-                <div class="value" id="ufr">
+                <span id="ufr">
                     -
-                </div>
+                </span>
 
-                <div class="unit">
+                <span class="result-unit">
                     mL/kg/jam
-                </div>
+                </span>
 
             </div>
 
         </div>
 
 
-        <div
-            id="status"
-            class="status status-empty">
-            Belum dilakukan perhitungan
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div
+        id="status"
+        class="status-box status-empty">
+
+        <div class="status-icon">
+            ?
         </div>
 
+        <div class="status-content">
 
-        <div class="info-box">
+            <small>
+                Hasil Skrining Risiko UFR
+            </small>
 
-            <strong>Rumus Estimasi UF Goal:</strong><br>
+            <strong>
+                Belum dilakukan
+            </strong>
 
-            UF Goal =
-            (BB Pre-HD − Dry Weight) × 1000
-            + Cairan Masuk Selama HD
-
-            <br><br>
-
-            <strong>Rumus UFR:</strong><br>
-
-            UFR =
-            UF Goal ÷ (BB Pre-HD × Durasi HD)
-
-        </div>
-
-
-        <div class="warning-box">
-
-            <strong>⚠️ Catatan Klinis:</strong><br>
-
-            Hasil DIGI-UF merupakan alat bantu perhitungan dan
-            skrining. Estimasi UF Goal tidak menggantikan penilaian
-            klinis tenaga kesehatan dalam menentukan target ultrafiltrasi
-            pasien.
-
-        </div>
-
-
-        <div class="button-row no-print">
-
-            <button
-                class="btn-print"
-                onclick="cetakHasil()">
-                🖨️ Cetak Hasil
-            </button>
+            <p>
+                Silakan masukkan data pasien
+                kemudian tekan Hitung DIGI-UF.
+            </p>
 
         </div>
 
     </div>
 
 
-    <!-- KLASIFIKASI -->
+    <div class="button-row no-print">
 
-    <div class="card">
+        <button
+            class="btn btn-print"
+            onclick="cetakHasil()">
 
-        <h2>🚦 Klasifikasi Risiko UFR</h2>
+            🖨️
 
-        <div class="table-wrapper">
+            Cetak Hasil
 
-            <table>
+        </button>
 
-                <thead>
+    </div>
 
-                    <tr>
-                        <th>Nilai UFR</th>
-                        <th>Kategori</th>
-                        <th>Interpretasi</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-
-                        <td>&lt; 10 mL/kg/jam</td>
-
-                        <td>
-                            <span class="badge badge-low">
-                                RENDAH
-                            </span>
-                        </td>
-
-                        <td>
-                            Risiko UFR rendah
-                        </td>
-
-                    </tr>
+</section>
 
 
-                    <tr>
+<!-- =====================================================
+     KLASIFIKASI
+===================================================== -->
 
-                        <td>10–13 mL/kg/jam</td>
-
-                        <td>
-                            <span class="badge badge-warning">
-                                WASPADA
-                            </span>
-                        </td>
-
-                        <td>
-                            Early Warning
-                        </td>
-
-                    </tr>
+<section
+    class="card"
+    id="informasi">
 
 
-                    <tr>
+    <div class="card-header">
 
-                        <td>&gt; 13 mL/kg/jam</td>
-
-                        <td>
-                            <span class="badge badge-high">
-                                HIGH UFR
-                            </span>
-                        </td>
-
-                        <td>
-                            Risiko UFR tinggi
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+        <div class="section-number">
+            3
         </div>
+
+        <h2>Klasifikasi Risiko UFR</h2>
 
     </div>
 
 
-    <!-- RIWAYAT -->
+    <p class="card-description">
 
-    <div class="card no-print">
+        Kategori skrining berdasarkan nilai
+        Ultrafiltration Rate (UFR).
 
-        <h2>🗂️ Riwayat Skrining</h2>
+    </p>
 
-        <div class="subtitle">
-            Riwayat tersimpan pada perangkat/browser yang digunakan.
-        </div>
 
-        <div class="table-wrapper">
+    <div class="classification-grid">
 
-            <table>
 
-                <thead>
+        <div class="classification low">
 
-                    <tr>
+            <div class="classification-icon">
+                ✓
+            </div>
 
-                        <th>No</th>
-                        <th>Kode Sesi</th>
-                        <th>BB Pre-HD</th>
-                        <th>Dry Weight</th>
-                        <th>Cairan Masuk</th>
-                        <th>Durasi</th>
-                        <th>UF Goal</th>
-                        <th>UFR</th>
-                        <th>Kategori</th>
+            <strong>
+                &lt; 10 mL/kg/jam
+            </strong>
 
-                    </tr>
+            <span>
+                🟢 RENDAH
+            </span>
 
-                </thead>
-
-                <tbody id="riwayatTable">
-
-                    <tr>
-
-                        <td colspan="9">
-                            Belum ada data skrining.
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
+            <span>
+                Risiko UFR rendah
+            </span>
 
         </div>
 
 
-        <div class="button-row">
+        <div class="classification warning">
 
-            <button
-                class="btn-danger"
-                onclick="hapusRiwayat()">
-                🗑️ Hapus Semua Riwayat
-            </button>
+            <div class="classification-icon">
+                ⚠
+            </div>
+
+            <strong>
+                10–13 mL/kg/jam
+            </strong>
+
+            <span>
+                🟡 WASPADA
+            </span>
+
+            <span>
+                Early Warning
+            </span>
 
         </div>
+
+
+        <div class="classification high">
+
+            <div class="classification-icon">
+                !
+            </div>
+
+            <strong>
+                &gt; 13 mL/kg/jam
+            </strong>
+
+            <span>
+                🔴 HIGH UFR
+            </span>
+
+            <span>
+                Risiko UFR tinggi
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RIWAYAT
+===================================================== -->
+
+<section
+    class="card"
+    id="riwayat">
+
+
+    <div class="card-header">
+
+        <div class="section-number">
+            4
+        </div>
+
+        <h2>Riwayat Skrining</h2>
 
     </div>
 
 
-    <!-- TENTANG -->
+    <p class="card-description">
 
-    <div class="card">
+        Riwayat hasil skrining tersimpan pada
+        perangkat/browser yang digunakan.
 
-        <h2>ℹ️ Tentang DIGI-UF</h2>
+    </p>
 
-        <p>
-            <strong>DIGI-UF</strong> merupakan inovasi digital berupa
-            UF Calculator yang dirancang sebagai alat bantu untuk
-            melakukan perhitungan ultrafiltrasi dan skrining dini
-            risiko High Ultrafiltration Rate pada pasien hemodialisis.
-        </p>
 
-        <p>
-            Aplikasi menggunakan estimasi UF Goal sebagai dasar
-            perhitungan UFR. Nilai UFR kemudian diklasifikasikan
-            menjadi kategori rendah, waspada, dan High UFR.
-        </p>
+    <div class="table-container">
 
-        <p>
-            DIGI-UF tidak dimaksudkan untuk menggantikan keputusan
-            klinis tenaga kesehatan.
-        </p>
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Kode Sesi</th>
+
+                    <th>BB Pre-HD<br>(kg)</th>
+
+                    <th>Dry Weight<br>(kg)</th>
+
+                    <th>Cairan Masuk<br>(mL)</th>
+
+                    <th>Durasi<br>(jam)</th>
+
+                    <th>UF Goal<br>(mL)</th>
+
+                    <th>UFR<br>(mL/kg/jam)</th>
+
+                    <th>Kategori</th>
+
+                    <th>Waktu</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="riwayatTable">
+
+            </tbody>
+
+        </table>
 
     </div>
+
+
+    <div class="button-row no-print">
+
+        <button
+            class="btn btn-excel"
+            onclick="exportCSV()">
+
+            📊
+
+            Export Excel
+
+        </button>
+
+
+        <button
+            class="btn btn-danger"
+            onclick="hapusRiwayat()">
+
+            🗑️
+
+            Hapus Semua Riwayat
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TENTANG
+===================================================== -->
+
+<section
+    class="card"
+    id="tentang">
+
+
+    <div class="card-header">
+
+        <div class="section-number">
+            5
+        </div>
+
+        <h2>Tentang DIGI-UF</h2>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <div class="about-text">
+
+            <p>
+
+                <strong>DIGI-UF</strong>
+                merupakan inovasi digital berupa
+                UF Calculator yang dirancang sebagai
+                alat bantu dalam perhitungan
+                Ultrafiltration Rate (UFR) dan
+                skrining dini risiko High UFR
+                pada pasien hemodialisis.
+
+            </p>
+
+            <br>
+
+            <p>
+
+                DIGI-UF dilengkapi fitur pendukung
+                berupa estimasi UF Goal yang dapat
+                digunakan sebagai dasar perhitungan
+                UFR. Fungsi utama aplikasi tetap
+                berfokus pada <strong>perhitungan UFR
+                dan skrining risiko High UFR.</strong>
+
+            </p>
+
+        </div>
+
+
+        <div class="tip-box">
+
+            <h3>
+                💡 Tips Klinis
+            </h3>
+
+            <p>
+
+                Nilai UFR perlu diperhatikan bersama
+                kondisi klinis pasien. Hasil DIGI-UF
+                merupakan alat bantu perhitungan dan
+                skrining, bukan pengganti penilaian
+                klinis tenaga kesehatan.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
 
 </div>
 
 
-<footer>
-    DIGI-UF © 2026 | Digital Ultrafiltration Rate Calculator
+</main>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div>
+
+        <strong>
+            💧 DIGI-UF
+        </strong>
+
+        <span>
+            © 2026 | Digital Ultrafiltration Rate Calculator
+        </span>
+
+    </div>
+
+    <span>
+        Alat bantu skrining — bukan pengganti keputusan klinis
+    </span>
+
 </footer>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+
+    Berhasil
+
+</div>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    DATA RIWAYAT
-===================================================== */
+========================================================= */
 
 let riwayatData =
-    JSON.parse(localStorage.getItem("digiUFHistory")) || [];
+    JSON.parse(
+        localStorage.getItem("digiUFHistory")
+    ) || [];
 
 
-/* =====================================================
+/* =========================================================
+   FORMAT ANGKA
+========================================================= */
+
+function formatNumber(number, decimals = 0) {
+
+    return Number(number)
+        .toLocaleString("id-ID", {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+        });
+
+}
+
+
+/* =========================================================
    HITUNG DIGI-UF
-===================================================== */
+========================================================= */
 
 function hitungDIGIUF() {
 
-    const kodeSesi =
-        document.getElementById("kodeSesi").value.trim();
+    const kode =
+        document
+        .getElementById("kodeSesi")
+        .value
+        .trim();
 
     const bb =
-        parseFloat(document.getElementById("bbPre").value);
+        parseFloat(
+            document.getElementById("bbPre").value
+        );
 
     const dryWeight =
-        parseFloat(document.getElementById("dryWeight").value);
+        parseFloat(
+            document.getElementById("dryWeight").value
+        );
 
     const cairan =
-        parseFloat(document.getElementById("cairanMasuk").value);
+        parseFloat(
+            document.getElementById("cairanMasuk").value
+        );
 
     const durasi =
-        parseFloat(document.getElementById("durasi").value);
+        parseFloat(
+            document.getElementById("durasi").value
+        );
 
 
     /* VALIDASI */
 
     if (
-        !kodeSesi ||
+        !kode ||
         isNaN(bb) ||
         isNaN(dryWeight) ||
         isNaN(cairan) ||
         isNaN(durasi)
     ) {
 
-        alert("⚠️ Mohon isi semua data.");
+        alert(
+            "⚠️ Mohon isi semua data terlebih dahulu."
+        );
 
         return;
+
     }
 
 
-    if (bb <= 0 || dryWeight <= 0 || durasi <= 0) {
+    if (
+        bb <= 0 ||
+        dryWeight <= 0 ||
+        durasi <= 0
+    ) {
 
-        alert("⚠️ BB, Dry Weight, dan durasi harus lebih dari 0.");
+        alert(
+            "⚠️ BB, Dry Weight, dan durasi harus lebih dari 0."
+        );
 
         return;
+
     }
 
 
     if (cairan < 0) {
 
-        alert("⚠️ Cairan masuk tidak boleh bernilai negatif.");
+        alert(
+            "⚠️ Cairan masuk tidak boleh negatif."
+        );
 
         return;
+
     }
 
 
     if (bb < dryWeight) {
 
         alert(
-            "⚠️ BB Pre-HD lebih rendah daripada Dry Weight. " +
-            "Silakan periksa kembali data yang dimasukkan."
+            "⚠️ BB Pre-HD tidak boleh lebih rendah " +
+            "daripada Dry Weight. Silakan periksa kembali data."
         );
 
         return;
+
     }
 
 
-    /* =================================================
+    /* =====================================================
        1. SELISIH BB
-    ================================================= */
+    ===================================================== */
 
     const selisihBB =
         bb - dryWeight;
 
 
-    /* =================================================
+    /* =====================================================
        2. ESTIMASI UF GOAL
-
-       (BB Pre-HD - Dry Weight) × 1000
-       + Cairan Masuk
-    ================================================= */
+    ===================================================== */
 
     const ufGoal =
         (selisihBB * 1000) + cairan;
 
 
-    /* =================================================
-       3. HITUNG UFR
-
-       UF Goal / (BB × Durasi)
-    ================================================= */
+    /* =====================================================
+       3. UFR
+    ===================================================== */
 
     const ufr =
-        ufGoal / (bb * durasi);
+        ufGoal /
+        (bb * durasi);
 
 
-    /* =================================================
+    /* =====================================================
        4. KATEGORI
-    ================================================= */
+    ===================================================== */
 
-    let kategori = "";
-    let statusClass = "";
+    let kategori;
+    let statusClass;
+    let icon;
+    let penjelasan;
 
 
     if (ufr < 10) {
 
         kategori = "RENDAH";
 
-        statusClass = "status-low";
+        statusClass =
+            "status-low";
+
+        icon = "✓";
+
+        penjelasan =
+            "Nilai UFR berada pada kategori rendah.";
 
     }
 
     else if (ufr <= 13) {
 
-        kategori = "WASPADA / EARLY WARNING";
+        kategori =
+            "WASPADA / EARLY WARNING";
 
-        statusClass = "status-warning";
+        statusClass =
+            "status-warning";
+
+        icon = "⚠";
+
+        penjelasan =
+            "Nilai UFR berada pada rentang waspada.";
 
     }
 
     else {
 
-        kategori = "HIGH UFR";
+        kategori =
+            "HIGH UFR";
 
-        statusClass = "status-high";
+        statusClass =
+            "status-high";
+
+        icon = "!";
+
+        penjelasan =
+            "Nilai UFR berada di atas 13 mL/kg/jam.";
 
     }
 
 
-    /* =================================================
+    /* =====================================================
        TAMPILKAN HASIL
-    ================================================= */
+    ===================================================== */
 
-    document.getElementById("selisihBB").textContent =
-        selisihBB.toFixed(1);
+    document
+        .getElementById("selisihBB")
+        .textContent =
+        formatNumber(selisihBB, 1);
 
-    document.getElementById("ufGoal").textContent =
-        ufGoal.toFixed(0);
 
-    document.getElementById("ufr").textContent =
-        ufr.toFixed(2);
+    document
+        .getElementById("ufGoal")
+        .textContent =
+        formatNumber(ufGoal, 0);
+
+
+    document
+        .getElementById("ufr")
+        .textContent =
+        formatNumber(ufr, 2);
 
 
     const status =
@@ -938,20 +2789,42 @@ function hitungDIGIUF() {
 
 
     status.className =
-        "status " + statusClass;
+        "status-box " +
+        statusClass;
 
 
-    status.innerHTML =
-        "HASIL SKRINING: " + kategori;
+    status.innerHTML = `
+
+        <div class="status-icon">
+            ${icon}
+        </div>
+
+        <div class="status-content">
+
+            <small>
+                Hasil Skrining Risiko UFR
+            </small>
+
+            <strong>
+                ${kategori}
+            </strong>
+
+            <p>
+                ${penjelasan}
+            </p>
+
+        </div>
+
+    `;
 
 
-    /* =================================================
+    /* =====================================================
        SIMPAN RIWAYAT
-    ================================================= */
+    ===================================================== */
 
     const dataBaru = {
 
-        kode: kodeSesi,
+        kode: kode,
 
         bb: bb,
 
@@ -967,12 +2840,15 @@ function hitungDIGIUF() {
 
         kategori: kategori,
 
-        waktu: new Date().toLocaleString("id-ID")
+        waktu:
+            new Date()
+            .toLocaleString("id-ID")
 
     };
 
 
     riwayatData.push(dataBaru);
+
 
     localStorage.setItem(
         "digiUFHistory",
@@ -984,94 +2860,173 @@ function hitungDIGIUF() {
 
     updateDashboard();
 
+    showToast(
+        "✓ Perhitungan berhasil disimpan."
+    );
+
+
+    /* Scroll ke hasil */
+
+    document
+        .getElementById("status")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
 }
 
 
-/* =====================================================
+/* =========================================================
    TAMPILKAN RIWAYAT
-===================================================== */
+========================================================= */
 
 function tampilkanRiwayat() {
 
     const table =
-        document.getElementById("riwayatTable");
+        document.getElementById(
+            "riwayatTable"
+        );
 
 
-    if (riwayatData.length === 0) {
+    if (
+        !riwayatData ||
+        riwayatData.length === 0
+    ) {
 
         table.innerHTML = `
+
             <tr>
-                <td colspan="9">
-                    Belum ada data skrining.
+
+                <td colspan="10">
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon">
+                            🗂️
+                        </div>
+
+                        <p>
+                            Belum ada data skrining.
+                        </p>
+
+                    </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
+
     }
 
 
     table.innerHTML = "";
 
 
-    riwayatData.forEach((data, index) => {
+    riwayatData.forEach(
+        (data, index) => {
 
-        let badgeClass = "badge-low";
+
+            let badgeClass =
+                "badge-low";
 
 
-        if (data.kategori.includes("WASPADA")) {
+            if (
+                data.kategori
+                .includes("WASPADA")
+            ) {
 
-            badgeClass = "badge-warning";
+                badgeClass =
+                    "badge-warning";
+
+            }
+
+
+            if (
+                data.kategori
+                .includes("HIGH")
+            ) {
+
+                badgeClass =
+                    "badge-high";
+
+            }
+
+
+            const row = `
+
+                <tr>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${data.kode}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${formatNumber(data.bb,1)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(data.dryWeight,1)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(data.cairan,0)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(data.durasi,1)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(data.ufGoal,0)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${formatNumber(data.ufr,2)}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="badge ${badgeClass}">
+
+                            ${data.kategori}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${data.waktu}
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            table.innerHTML += row;
 
         }
-
-        else if (data.kategori.includes("HIGH")) {
-
-            badgeClass = "badge-high";
-
-        }
-
-
-        table.innerHTML += `
-
-            <tr>
-
-                <td>${index + 1}</td>
-
-                <td>${data.kode}</td>
-
-                <td>${data.bb.toFixed(1)}</td>
-
-                <td>${data.dryWeight.toFixed(1)}</td>
-
-                <td>${data.cairan.toFixed(0)}</td>
-
-                <td>${data.durasi.toFixed(1)}</td>
-
-                <td>${data.ufGoal.toFixed(0)}</td>
-
-                <td>${data.ufr.toFixed(2)}</td>
-
-                <td>
-
-                    <span class="badge ${badgeClass}">
-                        ${data.kategori}
-                    </span>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
+    );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    DASHBOARD
-===================================================== */
+========================================================= */
 
 function updateDashboard() {
 
@@ -1081,44 +3036,91 @@ function updateDashboard() {
 
     const high =
         riwayatData.filter(
-            item => item.kategori === "HIGH UFR"
+            item =>
+                item.kategori === "HIGH UFR"
         ).length;
 
 
-    document.getElementById("totalSkrining")
+    const warning =
+        riwayatData.filter(
+            item =>
+                item.kategori
+                .includes("WASPADA")
+        ).length;
+
+
+    const low =
+        riwayatData.filter(
+            item =>
+                item.kategori === "RENDAH"
+        ).length;
+
+
+    document
+        .getElementById("totalSkrining")
         .textContent = total;
 
 
-    document.getElementById("totalHigh")
+    document
+        .getElementById("totalHigh")
         .textContent = high;
+
+
+    document
+        .getElementById("totalWarning")
+        .textContent = warning;
+
+
+    document
+        .getElementById("totalLow")
+        .textContent = low;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 function resetForm() {
 
-    document.getElementById("kodeSesi").value = "";
-
-    document.getElementById("bbPre").value = "";
-
-    document.getElementById("dryWeight").value = "";
-
-    document.getElementById("cairanMasuk").value = "";
-
-    document.getElementById("durasi").value = "";
+    document
+        .getElementById("kodeSesi")
+        .value = "";
 
 
-    document.getElementById("selisihBB")
+    document
+        .getElementById("bbPre")
+        .value = "";
+
+
+    document
+        .getElementById("dryWeight")
+        .value = "";
+
+
+    document
+        .getElementById("cairanMasuk")
+        .value = "";
+
+
+    document
+        .getElementById("durasi")
+        .value = "";
+
+
+    document
+        .getElementById("selisihBB")
         .textContent = "-";
 
-    document.getElementById("ufGoal")
+
+    document
+        .getElementById("ufGoal")
         .textContent = "-";
 
-    document.getElementById("ufr")
+
+    document
+        .getElementById("ufr")
         .textContent = "-";
 
 
@@ -1127,26 +3129,58 @@ function resetForm() {
 
 
     status.className =
-        "status status-empty";
+        "status-box status-empty";
 
 
-    status.textContent =
-        "Belum dilakukan perhitungan";
+    status.innerHTML = `
+
+        <div class="status-icon">
+            ?
+        </div>
+
+        <div class="status-content">
+
+            <small>
+                Hasil Skrining Risiko UFR
+            </small>
+
+            <strong>
+                Belum dilakukan
+            </strong>
+
+            <p>
+                Silakan masukkan data pasien
+                kemudian tekan Hitung DIGI-UF.
+            </p>
+
+        </div>
+
+    `;
+
+
+    showToast(
+        "Form berhasil direset."
+    );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    HAPUS RIWAYAT
-===================================================== */
+========================================================= */
 
 function hapusRiwayat() {
 
-    if (riwayatData.length === 0) {
+    if (
+        riwayatData.length === 0
+    ) {
 
-        alert("Tidak ada riwayat untuk dihapus.");
+        alert(
+            "Belum ada riwayat yang dapat dihapus."
+        );
 
         return;
+
     }
 
 
@@ -1156,7 +3190,11 @@ function hapusRiwayat() {
         );
 
 
-    if (!yakin) return;
+    if (!yakin) {
+
+        return;
+
+    }
 
 
     riwayatData = [];
@@ -1171,12 +3209,107 @@ function hapusRiwayat() {
 
     updateDashboard();
 
+
+    showToast(
+        "Riwayat berhasil dihapus."
+    );
+
 }
 
 
-/* =====================================================
-   CETAK
-===================================================== */
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportCSV() {
+
+    if (
+        riwayatData.length === 0
+    ) {
+
+        alert(
+            "Belum ada data untuk diekspor."
+        );
+
+        return;
+
+    }
+
+
+    let csv =
+        "No,Kode Sesi,BB Pre-HD (kg),Dry Weight (kg),Cairan Masuk (mL),Durasi (jam),UF Goal (mL),UFR (mL/kg/jam),Kategori,Waktu\n";
+
+
+    riwayatData.forEach(
+        (data, index) => {
+
+            csv +=
+                `${index + 1},` +
+                `"${data.kode}",` +
+                `${data.bb},` +
+                `${data.dryWeight},` +
+                `${data.cairan},` +
+                `${data.durasi},` +
+                `${data.ufGoal},` +
+                `${data.ufr.toFixed(2)},` +
+                `"${data.kategori}",` +
+                `"${data.waktu}"\n`;
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            ["\ufeff" + csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+
+    link.download =
+        "Riwayat_DIGI-UF.csv";
+
+
+    document
+        .body
+        .appendChild(link);
+
+
+    link.click();
+
+
+    document
+        .body
+        .removeChild(link);
+
+
+    URL.revokeObjectURL(url);
+
+
+    showToast(
+        "✓ Data berhasil diekspor."
+    );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
 
 function cetakHasil() {
 
@@ -1185,9 +3318,163 @@ function cetakHasil() {
 }
 
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
+/* =========================================================
+   JAM & TANGGAL
+========================================================= */
+
+function updateDateTime() {
+
+    const now =
+        new Date();
+
+
+    const tanggal =
+        now.toLocaleDateString(
+            "id-ID",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    const jam =
+        now.toLocaleTimeString(
+            "id-ID",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+
+    document
+        .getElementById(
+            "tanggalSekarang"
+        )
+        .textContent = tanggal;
+
+
+    document
+        .getElementById(
+            "jamSekarang"
+        )
+        .textContent = jam;
+
+}
+
+
+updateDateTime();
+
+
+setInterval(
+    updateDateTime,
+    1000
+);
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(".nav-item")
+    .forEach(
+        item => {
+
+            item.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(
+                            ".nav-item"
+                        )
+                        .forEach(
+                            nav =>
+                                nav.classList
+                                .remove("active")
+                        );
+
+
+                    this.classList
+                        .add("active");
+
+
+                    if (
+                        window.innerWidth <= 800
+                    ) {
+
+                        document
+                            .getElementById(
+                                "sidebar"
+                            )
+                            .classList
+                            .remove("open");
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD
+========================================================= */
 
 tampilkanRiwayat();
 
@@ -1197,4 +3484,3 @@ updateDashboard();
 
 </body>
 </html>
-```
