@@ -1663,6 +1663,7 @@ tbody tr:hover {
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 
 
@@ -2514,7 +2515,7 @@ tbody tr:hover {
 
         <button
             class="btn btn-excel"
-            onclick="exportCSV()">
+            onclick="exportExcel()">
 
             📊
 
@@ -3346,89 +3347,57 @@ function hapusRiwayat() {
    EXPORT CSV
 ========================================================= */
 
-function exportCSV() {
-
-    if (
-        riwayatData.length === 0
-    ) {
-
-        alert(
-            "Belum ada data untuk diekspor."
-        );
-
+function exportExcel() {
+    if (!riwayatData || riwayatData.length === 0) {
+        alert("Belum ada data riwayat skrining yang dapat diekspor.");
         return;
-
     }
 
+    const rows = riwayatData.map((item, index) => ({
+        "No": index + 1,
+        "Kode Sesi": item.kode ?? item.kodeSesi ?? "",
+        "BB Pre-HD (kg)": Number(item.bb ?? item.bbPreHD ?? 0),
+        "Dry Weight (kg)": Number(item.dw ?? item.dryWeight ?? 0),
+        "Cairan Masuk (mL)": Number(item.cairan ?? item.cairanMasuk ?? 0),
+        "Durasi HD (jam)": Number(item.durasi ?? 0),
+        "UF Goal (mL)": Number(item.ufGoal ?? item.uf ?? 0),
+        "UFR (mL/kg/jam)": Number(item.ufr ?? 0),
+        "Kategori": item.kategori ?? "",
+        "Waktu Skrining": item.waktu ?? item.timestamp ?? ""
+    }));
 
-    let csv =
-        "No,Kode Sesi,BB Pre-HD (kg),Dry Weight (kg),Cairan Masuk (mL),Durasi (jam),UF Goal (mL),UFR (mL/kg/jam),Kategori,Waktu\n";
+    const ws = XLSX.utils.json_to_sheet(rows);
 
+    // Lebar kolom agar rapi saat dibuka di Excel.
+    ws["!cols"] = [
+        { wch: 6 },
+        { wch: 15 },
+        { wch: 17 },
+        { wch: 18 },
+        { wch: 20 },
+        { wch: 17 },
+        { wch: 16 },
+        { wch: 21 },
+        { wch: 28 },
+        { wch: 23 }
+    ];
 
-    riwayatData.forEach(
-        (data, index) => {
+    // Filter otomatis pada baris header.
+    ws["!autofilter"] = {
+        ref: XLSX.utils.encode_range({
+            s: { r: 0, c: 0 },
+            e: { r: rows.length, c: 9 }
+        })
+    };
 
-            csv +=
-                `${index + 1},` +
-                `"${data.kode}",` +
-                `${data.bb},` +
-                `${data.dryWeight},` +
-                `${data.cairan},` +
-                `${data.durasi},` +
-                `${data.ufGoal},` +
-                `${data.ufr.toFixed(2)},` +
-                `"${data.kategori}",` +
-                `"${data.waktu}"\n`;
+    // Freeze header agar tetap terlihat saat scroll.
+    ws["!freeze"] = { xSplit: 0, ySplit: 1 };
 
-        }
-    );
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Riwayat Skrining");
 
-
-    const blob =
-        new Blob(
-            ["\ufeff" + csv],
-            {
-                type:
-                    "text/csv;charset=utf-8;"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const link =
-        document.createElement("a");
-
-
-    link.href = url;
-
-
-    link.download =
-        "Riwayat_DIGI-UF.csv";
-
-
-    document
-        .body
-        .appendChild(link);
-
-
-    link.click();
-
-
-    document
-        .body
-        .removeChild(link);
-
-
-    URL.revokeObjectURL(url);
-
-
-    showToast(
-        "✓ Data berhasil diekspor."
-    );
-
+    const tanggal = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `Riwayat_DIGI-UF_${tanggal}.xlsx`);
 }
 
 
